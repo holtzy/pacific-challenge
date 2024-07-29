@@ -10,6 +10,7 @@ type BubbleMapProps = {
   data: FeatureCollection;
   selectedIsland: Island | undefined;
   setSelectedIsland: (newIsland: Island) => void;
+  scale: number;
 };
 
 export const BubbleMap = ({
@@ -18,10 +19,11 @@ export const BubbleMap = ({
   data,
   selectedIsland,
   setSelectedIsland,
+  scale,
 }: BubbleMapProps) => {
   const projection = geoOrthographic()
     .rotate([200, 5])
-    .scale(200)
+    .scale(scale)
     .translate([width / 2, height / 2]);
 
   const geoPathGenerator = geoPath().projection(projection);
@@ -41,6 +43,12 @@ export const BubbleMap = ({
       );
     });
 
+  //
+  //
+  // ALL ISLAND
+  //
+  //
+
   const allBubbles = islandCoordinates.map((island) => {
     const [x, y] = projection(island.coordinates);
 
@@ -55,10 +63,11 @@ export const BubbleMap = ({
         key={island.name}
         cx={x}
         cy={y}
-        r={selectedIsland === island.name ? 10 : 6}
+        r={selectedIsland === island.name ? 10 : 20}
         fill={color}
         fillOpacity={0.4}
         stroke={color}
+        strokeWidth={1}
         onClick={() => {
           setSelectedIsland(island.name);
         }}
@@ -67,23 +76,32 @@ export const BubbleMap = ({
     );
   });
 
+  //
+  //
+  // SELECTED ISLAND
+  //
+  //
   const selectedIslandItem = islandCoordinates.find(
     (island) => island.name === selectedIsland
   );
-  const selectedCoord = projection(selectedIslandItem.coordinates);
 
-  const selectedBubble = (
-    <CircleItem
-      x={selectedCoord[0]}
-      y={selectedCoord[1]}
-      r={10}
-      color={islandColorScale(selectedIsland)}
-      onClick={() => {
-        setSelectedIsland(island.name);
-      }}
-      cursor={"pointer"}
-    />
-  );
+  let selectedBubble = null;
+  if (selectedIsland && selectedIslandItem) {
+    const selectedCoord = projection(selectedIslandItem.coordinates);
+
+    selectedBubble = (
+      <CircleItem
+        x={selectedCoord?.[0]}
+        y={selectedCoord?.[1]}
+        r={10}
+        color={islandColorScale(selectedIsland)}
+        onClick={() => {
+          setSelectedIsland(island.name);
+        }}
+        cursor={"pointer"}
+      />
+    );
+  }
 
   return (
     <div>

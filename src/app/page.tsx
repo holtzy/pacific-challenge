@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { data } from "@/data/data";
@@ -21,7 +21,11 @@ export default function Home() {
   const [educationLevel, setEducationLevel] =
     useState<EducationLevel>("Primary education");
 
+  const [isMinimapEnabled, setIsMinimapEnabled] = useState(false);
+
   const [selectedIsland, setSelectedIsland] = useState<Island>("Vanuatu");
+
+  const minimapRef = useRef(null);
 
   const islandSelectButtons = (
     <div className="flex gap-1 mt-4 ">
@@ -39,37 +43,77 @@ export default function Home() {
       })}
     </div>
   );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsMinimapEnabled(true);
+          }
+        });
+      },
+      {
+        threshold: 0.8,
+      }
+    );
+
+    if (minimapRef.current) {
+      observer.observe(minimapRef.current);
+    }
+    return () => {
+      if (minimapRef.current) {
+        observer.unobserve(minimapRef.current);
+      }
+    };
+  }, []);
+
   return (
     <main>
       <div
         className="container mx-auto px-4 py-6 "
         style={{ maxWidth: CONTAINER_WIDTH }}
       >
-        <div className="fixed top-2 right-2 border border-gray-200 rounded-md h-72 w-72 overflow-hidden">
+        {isMinimapEnabled && (
+          <div className="fixed top-2 right-2 border border-gray-200 rounded-md h-44 w-44 overflow-hidden">
+            <BubbleMap
+              data={geoData}
+              width={176}
+              height={176}
+              selectedIsland={selectedIsland}
+              setSelectedIsland={setSelectedIsland}
+              scale={100}
+            />
+          </div>
+        )}
+
+        <div className="relative w-full mt-44" style={{ height: 600 }}>
           <BubbleMap
             data={geoData}
-            width={300}
-            height={300}
-            selectedIsland={selectedIsland}
+            width={600}
+            height={600}
+            selectedIsland={undefined}
             setSelectedIsland={setSelectedIsland}
+            scale={300}
           />
+          <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-white to-transparent pointer-events-none" />
+          <div className="absolute top-0 right-0">
+            <span className="uppercase font-thin text-2xl text-gray-800">
+              A look at gender inequality
+            </span>
+
+            <h1 className="text-7xl">Women in the Pacific</h1>
+          </div>
+        </div>
+        <div className="w-full flex justify-center">
+          <p className="italic text-sm">
+            A project by Yan <a href="https://www.yan-holtz.com">Holtz</a> and
+            Joseph <a href="">Barbier</a>
+          </p>
         </div>
 
-        <h1>Women in the Pacific</h1>
-
-        <p className="italic text-sm">
-          A project by Yan Holtz and Joseph Barbier
-        </p>
-
+        <div className="h-10" />
         <p>Here we explain in a few words the result of our investigation</p>
-
-        <BubbleMap
-          data={geoData}
-          width={400}
-          height={250}
-          selectedIsland={selectedIsland}
-          setSelectedIsland={setSelectedIsland}
-        />
 
         <h2>Women DO study</h2>
 
@@ -127,6 +171,7 @@ export default function Home() {
             // .filter((item) => item.Occupation === "All occupations")
           }
         />
+        <div ref={minimapRef} />
 
         <h2>And work less</h2>
         <p>Evolution of unemployment rate</p>
