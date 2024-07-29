@@ -8,9 +8,10 @@ import {
   allIslandNames,
 } from "@/lib/types";
 import { educationLevelItems, sexColorScale } from "@/lib/utils";
-import { extent } from "d3-array";
+import { extent, max } from "d3-array";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { useMemo } from "react";
+import { DumbbellItem } from "./DumbbellItem";
 
 const MARGIN = { top: 30, right: 30, bottom: 30, left: 150 };
 const BAR_PADDING = 0.3;
@@ -28,15 +29,13 @@ export const Lollipop = ({ width, height, data }: LollipopProps) => {
 
   // Y axis is for groups since the barplot is horizontal
   const yScale = useMemo(() => {
-    return scaleBand()
-      .domain(allEducationLevels)
-      .range([0, boundsHeight])
-      .padding(BAR_PADDING);
+    return scaleBand().domain(allEducationLevels).range([0, boundsHeight]);
   }, [data, height]);
 
   // X axis
   const xScale = useMemo(() => {
-    const [min, max] = extent(data.map((d) => d.count));
+    const max = Math.max(...data.map((d) => Math.max(d.male, d.female)));
+
     return scaleLinear()
       .domain([0, max || 10])
       .range([0, boundsWidth]);
@@ -44,35 +43,19 @@ export const Lollipop = ({ width, height, data }: LollipopProps) => {
 
   // Build the shapes
   const allShapes = data.map((d, i) => {
-    const y = yScale(d.level);
+    const y = yScale(d.level) + yScale.bandwidth() / 2;
 
     if (y === undefined) {
       return null;
     }
 
     return (
-      <g key={i}>
-        <circle
-          cx={xScale(d.count)}
-          cy={yScale(d.level)}
-          r={3}
-          opacity={0.7}
-          stroke={sexColorScale(d.sex)}
-          fill={sexColorScale(d.sex)}
-          fillOpacity={0.3}
-          strokeWidth={1}
-        />
-        {/* <text
-          x={xScale(d.value) - 7}
-          y={y + yScale.bandwidth() / 2}
-          textAnchor="end"
-          alignmentBaseline="central"
-          fontSize={12}
-          opacity={xScale(d.value) > 90 ? 1 : 0} // hide label if bar is not wide enough
-        >
-          {d.value}
-        </text> */}
-      </g>
+      <DumbbellItem
+        key={i}
+        xValue1={xScale(d.male)}
+        xValue2={xScale(d.female)}
+        y={y}
+      />
     );
   });
 
@@ -109,7 +92,7 @@ export const Lollipop = ({ width, height, data }: LollipopProps) => {
     return (
       <text
         x={xScale(0) - 10}
-        y={yScale(ed)}
+        y={yScale(ed) + yScale.bandwidth() / 2}
         fill={"black"}
         textAnchor="end"
         alignmentBaseline="central"

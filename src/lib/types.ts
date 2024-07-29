@@ -11,8 +11,8 @@ export const allEducationLevels: EducationLevel[] = ["Early childhood education"
 export type EducationLevelItem = {
     island: Island;
     year: number;
-    count: number;
-    sex: Sex;
+    male: number;
+    female: number;
     age: AgeGroup;
     level: EducationLevel;
 };

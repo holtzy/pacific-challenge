@@ -92,3 +92,7 @@ a {
 blockquote {
   @apply mt-6 border-l-2 pl-6 italic;
 }
+
+.caption {
+  @apply text-sm text-gray-600;
+}

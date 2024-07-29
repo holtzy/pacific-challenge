@@ -12,6 +12,8 @@ import { educationLevelItems } from "@/lib/utils";
 import { BubbleMap } from "@/dataviz/bubbleMap/BubbleMap";
 import { geoData } from "@/data/pacific";
 
+const CONTAINER_WIDTH = 600;
+
 export default function Home() {
   const [educationLevel, setEducationLevel] =
     useState<EducationLevel>("Primary education");
@@ -19,8 +21,11 @@ export default function Home() {
   const [selectedIsland, setSelectedIsland] = useState<Island>("Vanuatu");
 
   return (
-    <main className="container mx-auto px-4 py-6 " style={{ maxWidth: 600 }}>
-      <div>
+    <main>
+      <div
+        className="container mx-auto px-4 py-6 "
+        style={{ maxWidth: CONTAINER_WIDTH }}
+      >
         <h1>Women in the Pacific</h1>
 
         <p>Here we explain in a few words the result of our investigation</p>
@@ -43,7 +48,19 @@ export default function Home() {
         <br />
         <h3>Women DO study</h3>
 
-        <div className="flex gap-1 mt-4">
+        <p>
+          Educational attainment varies from 1 island to the other. For
+          instance, most of the people reach the primary school in Vanuatu, when
+          most of the people go until upper secondary school in Nauru.
+        </p>
+
+        <p>
+          Educational attainment is globally stable with a few notable
+          exceptions. For instance, in Kiribati, most people aged 55-54 went to
+          lower 2nd when youger people (aged 25-54) reached the upper 2nd.
+        </p>
+
+        <div className="flex gap-1 mt-4 ">
           {allIslandNames.map((item) => {
             return (
               <Button
@@ -57,12 +74,33 @@ export default function Home() {
             );
           })}
         </div>
+      </div>
+
+      <div className="w-full flex gap-2 justify-center">
+        <Lollipop
+          width={500}
+          height={400}
+          data={educationLevelData
+            .filter((d) => d.island === selectedIsland)
+            .filter((d) => d.age === "25-54")}
+        />
 
         <Lollipop
           width={500}
           height={400}
-          data={educationLevelData.filter((d) => d.island === selectedIsland)}
+          data={educationLevelData
+            .filter((d) => d.island === selectedIsland)
+            .filter((d) => d.age === "55-64")}
         />
+      </div>
+
+      <div
+        className="container mx-auto px-4 py-6 "
+        style={{ maxWidth: CONTAINER_WIDTH }}
+      >
+        <p className="caption">
+          Fig 1.1 and 1.2: educational attainment in {selectedIsland}.
+        </p>
 
         <p>
           The king's subjects were not amused. They grumbled and complained, but
