@@ -1,18 +1,27 @@
+"use client";
+
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { data } from "@/data/data";
+import { educationLevelData } from "@/data/education-level";
 import { Barplot } from "@/dataviz/barplot/Barplot";
+import { Lollipop } from "@/dataviz/barplot/Lollipop";
+import { EducationLevel, Island, allIslandNames } from "@/lib/types";
+import { educationLevelItems } from "@/lib/utils";
 
 export default function Home() {
+  const [educationLevel, setEducationLevel] =
+    useState<EducationLevel>("Primary education");
+
+  const [selectedIsland, setSelectedIsland] = useState<Island>("Vanuatu");
+
   return (
     <main className="container mx-auto px-4 py-6 " style={{ maxWidth: 600 }}>
       <div>
-        <h1>Dataviz project Boilerplate</h1>
+        <h1>Women in the Pacific</h1>
 
-        <p>
-          Once upon a time, in a far-off land, there was a very lazy king who
-          spent all day lounging on his throne. One day, his advisors came to
-          him with a problem: the kingdom was running out of money.
-        </p>
+        <p>Here we explain in a few words the result of our investigation</p>
 
         <h2>The King's Plan</h2>
         <p>
@@ -29,7 +38,30 @@ export default function Home() {
           "After all," he said, "everyone enjoys a good joke, so it's only fair
           that they should pay for the privilege."
         </blockquote>
-        <h3>The Joke Tax</h3>
+        <br />
+        <h3>Women DO study</h3>
+
+        <div className="flex gap-1 mt-4">
+          {allIslandNames.map((item) => {
+            return (
+              <Button
+                key={item}
+                size={"sm"}
+                variant={item === selectedIsland ? "default" : "outline"}
+                onClick={() => setSelectedIsland(item)}
+              >
+                {item}
+              </Button>
+            );
+          })}
+        </div>
+
+        <Lollipop
+          width={500}
+          height={400}
+          data={educationLevelData.filter((d) => d.island === selectedIsland)}
+        />
+
         <p>
           The king's subjects were not amused. They grumbled and complained, but
           the king was firm:

@@ -1,0 +1,153 @@
+island,year,count,sex,age,level
+Kiribati,2020,552,Male,25-54,Early childhood education
+Kiribati,2020,2070,Male,25-54,Primary education
+Kiribati,2020,7594,Male,25-54,Lower secondary education
+Kiribati,2020,8590,Male,25-54,Upper secondary education
+Kiribati,2020,390,Male,25-54,Post-secondary non-tertiary education
+Kiribati,2020,664,Male,25-54,Tertiary education
+Kiribati,2020,138,Male,55-64,Early childhood education
+Kiribati,2020,573,Male,55-64,Primary education
+Kiribati,2020,1755,Male,55-64,Lower secondary education
+Kiribati,2020,393,Male,55-64,Upper secondary education
+Kiribati,2020,35,Male,55-64,Post-secondary non-tertiary education
+Kiribati,2020,137,Male,55-64,Tertiary education
+Kiribati,2020,384,Female,25-54,Early childhood education
+Kiribati,2020,1450,Female,25-54,Primary education
+Kiribati,2020,7166,Female,25-54,Lower secondary education
+Kiribati,2020,11118,Female,25-54,Upper secondary education
+Kiribati,2020,432,Female,25-54,Post-secondary non-tertiary education
+Kiribati,2020,886,Female,25-54,Tertiary education
+Kiribati,2020,202,Female,55-64,Early childhood education
+Kiribati,2020,871,Female,55-64,Primary education
+Kiribati,2020,2179,Female,55-64,Lower secondary education
+Kiribati,2020,374,Female,55-64,Upper secondary education
+Kiribati,2020,47,Female,55-64,Post-secondary non-tertiary education
+Kiribati,2020,86,Female,55-64,Tertiary education
+Marshall Islands,2021,318,Male,25-54,Early childhood education
+Marshall Islands,2021,210,Male,25-54,Primary education
+Marshall Islands,2021,1523,Male,25-54,Lower secondary education
+Marshall Islands,2021,2614,Male,25-54,Upper secondary education
+Marshall Islands,2021,1159,Male,25-54,Tertiary education
+Marshall Islands,2021,63,Male,55-64,Early childhood education
+Marshall Islands,2021,29,Male,55-64,Primary education
+Marshall Islands,2021,267,Male,55-64,Lower secondary education
+Marshall Islands,2021,406,Male,55-64,Upper secondary education
+Marshall Islands,2021,191,Male,55-64,Tertiary education
+Marshall Islands,2021,232,Female,25-54,Early childhood education
+Marshall Islands,2021,185,Female,25-54,Primary education
+Marshall Islands,2021,1687,Female,25-54,Lower secondary education
+Marshall Islands,2021,2580,Female,25-54,Upper secondary education
+Marshall Islands,2021,1194,Female,25-54,Tertiary education
+Marshall Islands,2021,51,Female,55-64,Early childhood education
+Marshall Islands,2021,41,Female,55-64,Primary education
+Marshall Islands,2021,356,Female,55-64,Lower secondary education
+Marshall Islands,2021,371,Female,55-64,Upper secondary education
+Marshall Islands,2021,144,Female,55-64,Tertiary education
+Nauru,2021,258,Male,25-54,Early childhood education
+Nauru,2021,128,Male,25-54,Primary education
+Nauru,2021,479,Male,25-54,Lower secondary education
+Nauru,2021,1189,Male,25-54,Upper secondary education
+Nauru,2021,11,Male,25-54,Post-secondary non-tertiary education
+Nauru,2021,88,Male,25-54,Tertiary education
+Nauru,2021,41,Male,55-64,Early childhood education
+Nauru,2021,7,Male,55-64,Primary education
+Nauru,2021,32,Male,55-64,Lower secondary education
+Nauru,2021,147,Male,55-64,Upper secondary education
+Nauru,2021,11,Male,55-64,Tertiary education
+Nauru,2021,165,Female,25-54,Early childhood education
+Nauru,2021,81,Female,25-54,Primary education
+Nauru,2021,407,Female,25-54,Lower secondary education
+Nauru,2021,1312,Female,25-54,Upper secondary education
+Nauru,2021,14,Female,25-54,Post-secondary non-tertiary education
+Nauru,2021,100,Female,25-54,Tertiary education
+Nauru,2021,36,Female,55-64,Early childhood education
+Nauru,2021,46,Female,55-64,Lower secondary education
+Nauru,2021,179,Female,55-64,Upper secondary education
+Nauru,2021,24,Female,55-64,Tertiary education
+Palau,2020,142,Male,25-54,Early childhood education
+Palau,2020,162,Male,25-54,Primary education
+Palau,2020,155,Male,25-54,Lower secondary education
+Palau,2020,2837,Male,25-54,Upper secondary education
+Palau,2020,276,Male,25-54,Post-secondary non-tertiary education
+Palau,2020,1185,Male,25-54,Tertiary education
+Palau,2020,22,Male,55-64,Early childhood education
+Palau,2020,37,Male,55-64,Primary education
+Palau,2020,55,Male,55-64,Lower secondary education
+Palau,2020,713,Male,55-64,Upper secondary education
+Palau,2020,82,Male,55-64,Post-secondary non-tertiary education
+Palau,2020,302,Male,55-64,Tertiary education
+Palau,2020,35,Female,25-54,Early childhood education
+Palau,2020,20,Female,25-54,Primary education
+Palau,2020,39,Female,25-54,Lower secondary education
+Palau,2020,1884,Female,25-54,Upper secondary education
+Palau,2020,99,Female,25-54,Post-secondary non-tertiary education
+Palau,2020,1485,Female,25-54,Tertiary education
+Palau,2020,21,Female,55-64,Early childhood education
+Palau,2020,22,Female,55-64,Primary education
+Palau,2020,24,Female,55-64,Lower secondary education
+Palau,2020,625,Female,55-64,Upper secondary education
+Palau,2020,37,Female,55-64,Post-secondary non-tertiary education
+Palau,2020,365,Female,55-64,Tertiary education
+Tonga,2021,780,Male,25-54,Early childhood education
+Tonga,2021,400,Male,25-54,Primary education
+Tonga,2021,3374,Male,25-54,Lower secondary education
+Tonga,2021,6074,Male,25-54,Upper secondary education
+Tonga,2021,3958,Male,25-54,Tertiary education
+Tonga,2021,225,Male,55-64,Early childhood education
+Tonga,2021,249,Male,55-64,Primary education
+Tonga,2021,1009,Male,55-64,Lower secondary education
+Tonga,2021,1182,Male,55-64,Upper secondary education
+Tonga,2021,671,Male,55-64,Tertiary education
+Tonga,2021,810,Female,25-54,Early childhood education
+Tonga,2021,328,Female,25-54,Primary education
+Tonga,2021,3025,Female,25-54,Lower secondary education
+Tonga,2021,8374,Female,25-54,Upper secondary education
+Tonga,2021,5202,Female,25-54,Tertiary education
+Tonga,2021,213,Female,55-64,Early childhood education
+Tonga,2021,267,Female,55-64,Primary education
+Tonga,2021,1075,Female,55-64,Lower secondary education
+Tonga,2021,1318,Female,55-64,Upper secondary education
+Tonga,2021,526,Female,55-64,Tertiary education
+Tuvalu,2017,136,Male,25-54,Early childhood education
+Tuvalu,2017,6,Male,25-54,Primary education
+Tuvalu,2017,658,Male,25-54,Lower secondary education
+Tuvalu,2017,248,Male,25-54,Upper secondary education
+Tuvalu,2017,119,Male,25-54,Post-secondary non-tertiary education
+Tuvalu,2017,174,Male,25-54,Tertiary education
+Tuvalu,2017,58,Male,55-64,Early childhood education
+Tuvalu,2017,162,Male,55-64,Lower secondary education
+Tuvalu,2017,18,Male,55-64,Upper secondary education
+Tuvalu,2017,16,Male,55-64,Post-secondary non-tertiary education
+Tuvalu,2017,35,Male,55-64,Tertiary education
+Tuvalu,2017,112,Female,25-54,Early childhood education
+Tuvalu,2017,7,Female,25-54,Primary education
+Tuvalu,2017,527,Female,25-54,Lower secondary education
+Tuvalu,2017,271,Female,25-54,Upper secondary education
+Tuvalu,2017,33,Female,25-54,Post-secondary non-tertiary education
+Tuvalu,2017,224,Female,25-54,Tertiary education
+Tuvalu,2017,63,Female,55-64,Early childhood education
+Tuvalu,2017,9,Female,55-64,Primary education
+Tuvalu,2017,197,Female,55-64,Lower secondary education
+Tuvalu,2017,24,Female,55-64,Upper secondary education
+Tuvalu,2017,7,Female,55-64,Post-secondary non-tertiary education
+Tuvalu,2017,25,Female,55-64,Tertiary education
+Vanuatu,2020,6028,Male,25-54,Early childhood education
+Vanuatu,2020,19714,Male,25-54,Primary education
+Vanuatu,2020,12489,Male,25-54,Lower secondary education
+Vanuatu,2020,7651,Male,25-54,Upper secondary education
+Vanuatu,2020,3218,Male,25-54,Tertiary education
+Vanuatu,2020,1277,Male,55-64,Early childhood education
+Vanuatu,2020,3780,Male,55-64,Primary education
+Vanuatu,2020,1593,Male,55-64,Lower secondary education
+Vanuatu,2020,537,Male,55-64,Upper secondary education
+Vanuatu,2020,506,Male,55-64,Tertiary education
+Vanuatu,2020,6881,Female,25-54,Early childhood education
+Vanuatu,2020,20090,Female,25-54,Primary education
+Vanuatu,2020,14054,Female,25-54,Lower secondary education
+Vanuatu,2020,7672,Female,25-54,Upper secondary education
+Vanuatu,2020,2402,Female,25-54,Tertiary education
+Vanuatu,2020,1837,Female,55-64,Early childhood education
+Vanuatu,2020,4063,Female,55-64,Primary education
+Vanuatu,2020,1376,Female,55-64,Lower secondary education
+Vanuatu,2020,318,Female,55-64,Upper secondary education
+Vanuatu,2020,250,Female,55-64,Tertiary education
