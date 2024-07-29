@@ -37,3 +37,48 @@ export const educationLevelItems: { label: string; value: EducationLevel }[] = [
     value: "Tertiary education",
   },
 ];
+
+export const islandCoordinates = [
+  {
+    name: "Kiribati",
+    coordinates: [
+      -157.3625, 1.8639
+    ]
+  },
+  {
+    name: "Marshall Islands",
+    coordinates: [
+      171.1845, 7.1315
+    ]
+  },
+  {
+    name: "Nauru",
+    coordinates: [
+      166.9315, -0.5228
+    ]
+  },
+  {
+    name: "Palau",
+    coordinates: [
+      134.5825, 7.5150
+    ]
+  },
+  {
+    name: "Tonga",
+    coordinates: [
+      -175.1982, -21.1790
+    ]
+  },
+  {
+    name: "Tuvalu",
+    coordinates: [
+      179.1940, -7.1095
+    ]
+  },
+  {
+    name: "Vanuatu",
+    coordinates: [
+      167.9547, -15.3767
+    ]
+  }
+];

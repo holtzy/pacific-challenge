@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { data } from "@/data/data";
 import { educationLevelData } from "@/data/education-level";
 import { Barplot } from "@/dataviz/barplot/Barplot";
-import { Lollipop } from "@/dataviz/barplot/Lollipop";
+import { Lollipop } from "@/dataviz/lollipop/Lollipop";
 import { EducationLevel, Island, allIslandNames } from "@/lib/types";
 import { educationLevelItems } from "@/lib/utils";
+import { BubbleMap } from "@/dataviz/bubbleMap/BubbleMap";
+import { geoData } from "@/data/pacific";
 
 export default function Home() {
   const [educationLevel, setEducationLevel] =
@@ -71,6 +73,9 @@ export default function Home() {
           <li>2nd level of jokes: 10 gold coins</li>
           <li>3rd level of one-liners : 20 gold coins</li>
         </ul>
+
+        <BubbleMap data={geoData} width={400} height={250} />
+
         <p>
           As a result, people stopped telling jokes, and the kingdom fell into a
           gloom. But there was one person who refused to let the king's
