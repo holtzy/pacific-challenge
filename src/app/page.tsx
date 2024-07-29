@@ -8,9 +8,10 @@ import { educationLevelData } from "@/data/education-level";
 import { Barplot } from "@/dataviz/barplot/Barplot";
 import { Lollipop } from "@/dataviz/lollipop/Lollipop";
 import { EducationLevel, Island, allIslandNames } from "@/lib/types";
-import { educationLevelItems } from "@/lib/utils";
+import { educationLevelItems, islandColorScale } from "@/lib/utils";
 import { BubbleMap } from "@/dataviz/bubbleMap/BubbleMap";
 import { geoData } from "@/data/pacific";
+import { genderPayGap } from "@/data/gender-pay-gap";
 
 const CONTAINER_WIDTH = 600;
 
@@ -28,25 +29,21 @@ export default function Home() {
       >
         <h1>Women in the Pacific</h1>
 
+        <p className="italic text-sm">
+          A project by Yan Holtz and Joseph Barbier
+        </p>
+
         <p>Here we explain in a few words the result of our investigation</p>
 
-        <h2>The King's Plan</h2>
-        <p>
-          The king thought long and hard, and finally came up with{" "}
-          <a
-            href="#"
-            className="font-medium text-primary underline underline-offset-4"
-          >
-            a brilliant plan
-          </a>
-          : he would tax the jokes in the kingdom.
-        </p>
-        <blockquote>
-          "After all," he said, "everyone enjoys a good joke, so it's only fair
-          that they should pay for the privilege."
-        </blockquote>
-        <br />
-        <h3>Women DO study</h3>
+        <BubbleMap
+          data={geoData}
+          width={400}
+          height={250}
+          selectedIsland={selectedIsland}
+          setSelectedIsland={setSelectedIsland}
+        />
+
+        <h2>Women DO study</h2>
 
         <p>
           Educational attainment varies from 1 island to the other. For
@@ -101,41 +98,20 @@ export default function Home() {
         <p className="caption">
           Fig 1.1 and 1.2: educational attainment in {selectedIsland}.
         </p>
+        <h2>But they are poorer</h2>
 
         <p>
-          The king's subjects were not amused. They grumbled and complained, but
-          the king was firm:
+          Weird. The dataset has very contrasted result on pay gap. Good news
+          but kills the story. Ask Joseph: one column is missing.
         </p>
-        <ul>
-          <li>1st level of puns: 5 gold coins</li>
-          <li>2nd level of jokes: 10 gold coins</li>
-          <li>3rd level of one-liners : 20 gold coins</li>
-        </ul>
-
-        <BubbleMap
-          data={geoData}
-          width={400}
-          height={250}
-          selectedIsland={selectedIsland}
-          setSelectedIsland={setSelectedIsland}
+        <Barplot
+          width={600}
+          height={500}
+          data={
+            genderPayGap.filter((item) => item.Urbanization === "National")
+            // .filter((item) => item.Occupation === "All occupations")
+          }
         />
-
-        <p>
-          As a result, people stopped telling jokes, and the kingdom fell into a
-          gloom. But there was one person who refused to let the king's
-          foolishness get him down: a court jester named Jokester.
-        </p>
-        <Button className="mt-6">This is a button</Button>
-
-        <h3>The People's Rebellion</h3>
-        <p>
-          The people of the kingdom, feeling uplifted by the laughter, started
-          to tell jokes and puns again, and soon the entire kingdom was in on
-          the joke.
-        </p>
-
-        <p>And here is a plot</p>
-        <Barplot width={500} height={400} data={data} />
       </div>
     </main>
   );

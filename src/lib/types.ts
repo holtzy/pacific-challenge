@@ -16,3 +16,11 @@ export type EducationLevelItem = {
     age: AgeGroup;
     level: EducationLevel;
 };
+
+export type GenderPayGapItem = {
+    Location: string,
+    Urbanization: "National" | string,
+    Occupation: string,
+    TIME_PERIOD: number,
+    OBS_VALUE: number,
+}

@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EducationLevel, Island } from "./types";
+import { EducationLevel, Island, allIslandNames } from "./types";
 import { scaleOrdinal } from "d3-scale";
 
 export function cn(...inputs: ClassValue[]) {
@@ -9,7 +9,12 @@ export function cn(...inputs: ClassValue[]) {
 
 export const sexColorScale = scaleOrdinal<string>()
   .domain(["Male", "Female"])
-  .range(["red", "blue"]);
+  .range(["#9d174d", "#60b3a2"]);
+
+
+export const islandColorScale = scaleOrdinal<string>()
+  .domain(allIslandNames)
+  .range(["#FED789FF", "#023743FF", "#72874EFF", "#476F84FF", "#A4BED5FF", "#453947FF"]);
 
 export const educationLevelItems: { label: string; value: EducationLevel }[] = [
   {

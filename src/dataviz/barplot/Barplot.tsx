@@ -1,14 +1,14 @@
-import { extent } from "d3-array";
+import { GenderPayGapItem, allIslandNames } from "@/lib/types";
+import { islandColorScale } from "@/lib/utils";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { useMemo } from "react";
 
 const MARGIN = { top: 30, right: 30, bottom: 30, left: 30 };
-const BAR_PADDING = 0.3;
 
 type BarplotProps = {
   width: number;
   height: number;
-  data: { name: string; value: number }[];
+  data: GenderPayGapItem[];
 };
 
 export const Barplot = ({ width, height, data }: BarplotProps) => {
@@ -16,63 +16,70 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
   const boundsWidth = width - MARGIN.right - MARGIN.left;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
-  // Y axis is for groups since the barplot is horizontal
-  const groups = data.sort((a, b) => b.value - a.value).map((d) => d.name);
+  // Y axis is for groups since the barplot is horizontal;
   const yScale = useMemo(() => {
     return scaleBand()
-      .domain(groups)
+      .domain(allIslandNames)
       .range([0, boundsHeight])
-      .padding(BAR_PADDING);
+      .padding(0.1);
   }, [data, height]);
 
   // X axis
   const xScale = useMemo(() => {
-    const [min, max] = extent(data.map((d) => d.value));
-    return scaleLinear()
-      .domain([0, max || 10])
-      .range([0, boundsWidth]);
+    return scaleLinear().domain([0, 2]).range([0, boundsWidth]);
   }, [data, width]);
 
-  // Build the shapes
-  const allShapes = data.map((d, i) => {
-    const y = yScale(d.name);
+  const allRects = data
+    .filter((d) => d.Occupation === "All occupations")
+    .map((d, i) => {
+      const y = yScale(d.Location);
+
+      if (y === undefined) {
+        return null;
+      }
+
+      return (
+        <g key={i}>
+          <rect
+            x={d.OBS_VALUE > 1 ? xScale(1) : xScale(d.OBS_VALUE)}
+            y={yScale(d.Location)}
+            width={
+              d.OBS_VALUE > 1
+                ? xScale(d.OBS_VALUE) - xScale(1)
+                : xScale(1) - xScale(d.OBS_VALUE)
+            }
+            height={yScale.bandwidth()}
+            opacity={0.7}
+            stroke={islandColorScale(d.Location)}
+            fill={islandColorScale(d.Location)}
+            fillOpacity={0.8}
+            strokeWidth={1}
+            rx={1}
+          />
+        </g>
+      );
+    });
+
+  const allCircles = data.map((d, i) => {
+    const y = yScale(d.Location);
+
     if (y === undefined) {
       return null;
     }
 
     return (
       <g key={i}>
-        <rect
-          x={xScale(0)}
-          y={yScale(d.name)}
-          width={xScale(d.value)}
-          height={yScale.bandwidth()}
+        <circle
+          cx={xScale(d.OBS_VALUE)}
+          cy={yScale(d.Location) + yScale.bandwidth() / 2}
+          r={4}
           opacity={0.7}
-          stroke="#9d174d"
-          fill="#9d174d"
+          stroke={islandColorScale(d.Location)}
+          fill={islandColorScale(d.Location)}
           fillOpacity={0.3}
           strokeWidth={1}
           rx={1}
         />
-        <text
-          x={xScale(d.value) - 7}
-          y={y + yScale.bandwidth() / 2}
-          textAnchor="end"
-          alignmentBaseline="central"
-          fontSize={12}
-          opacity={xScale(d.value) > 90 ? 1 : 0} // hide label if bar is not wide enough
-        >
-          {d.value}
-        </text>
-        <text
-          x={xScale(0) + 7}
-          y={y + yScale.bandwidth() / 2}
-          textAnchor="start"
-          alignmentBaseline="central"
-          fontSize={12}
-        >
-          {d.name}
-        </text>
       </g>
     );
   });
@@ -113,7 +120,8 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
           transform={`translate(${[MARGIN.left, MARGIN.top].join(",")})`}
         >
           {grid}
-          {allShapes}
+          {allRects}
+          {allCircles}
         </g>
       </svg>
     </div>
