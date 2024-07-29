@@ -12,6 +12,8 @@ import { educationLevelItems, islandColorScale } from "@/lib/utils";
 import { BubbleMap } from "@/dataviz/bubbleMap/BubbleMap";
 import { geoData } from "@/data/pacific";
 import { genderPayGap } from "@/data/gender-pay-gap";
+import { LineChart } from "@/dataviz/lineChart/LineChart";
+import { employmentRates } from "@/data/employment-rates";
 
 const CONTAINER_WIDTH = 600;
 
@@ -21,6 +23,22 @@ export default function Home() {
 
   const [selectedIsland, setSelectedIsland] = useState<Island>("Vanuatu");
 
+  const islandSelectButtons = (
+    <div className="flex gap-1 mt-4 ">
+      {allIslandNames.map((item) => {
+        return (
+          <Button
+            key={item}
+            size={"sm"}
+            variant={item === selectedIsland ? "default" : "outline"}
+            onClick={() => setSelectedIsland(item)}
+          >
+            {item}
+          </Button>
+        );
+      })}
+    </div>
+  );
   return (
     <main>
       <div
@@ -57,20 +75,7 @@ export default function Home() {
           lower 2nd when youger people (aged 25-54) reached the upper 2nd.
         </p>
 
-        <div className="flex gap-1 mt-4 ">
-          {allIslandNames.map((item) => {
-            return (
-              <Button
-                key={item}
-                size={"sm"}
-                variant={item === selectedIsland ? "default" : "outline"}
-                onClick={() => setSelectedIsland(item)}
-              >
-                {item}
-              </Button>
-            );
-          })}
-        </div>
+        {islandSelectButtons}
       </div>
 
       <div className="w-full flex gap-2 justify-center">
@@ -98,8 +103,8 @@ export default function Home() {
         <p className="caption">
           Fig 1.1 and 1.2: educational attainment in {selectedIsland}.
         </p>
-        <h2>But they are poorer</h2>
 
+        <h2>But they are poorer</h2>
         <p>
           Weird. The dataset has very contrasted result on pay gap. Good news
           but kills the story. Ask Joseph: one column is missing.
@@ -111,6 +116,17 @@ export default function Home() {
             genderPayGap.filter((item) => item.Urbanization === "National")
             // .filter((item) => item.Occupation === "All occupations")
           }
+        />
+
+        <h2>And work less</h2>
+        <p>Evolution of unemployment rate</p>
+        {islandSelectButtons}
+        <LineChart
+          width={600}
+          height={500}
+          data={employmentRates
+            .filter((d) => d.age === "25-54")
+            .filter((d) => d.island === selectedIsland)}
         />
       </div>
     </main>

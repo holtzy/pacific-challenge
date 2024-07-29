@@ -24,3 +24,11 @@ export type GenderPayGapItem = {
     TIME_PERIOD: number,
     OBS_VALUE: number,
 }
+
+export type EmploymentRateItem = {
+    island: string,
+    year: number,
+    unemployment_rate: number,
+    age: "25-54" | string,
+    sex: Sex,
+}
