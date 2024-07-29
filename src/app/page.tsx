@@ -87,33 +87,41 @@ export default function Home() {
           </div>
         )}
 
-        <div className="relative w-full mt-44" style={{ height: 600 }}>
-          <BubbleMap
-            data={geoData}
-            width={600}
-            height={600}
-            selectedIsland={undefined}
-            setSelectedIsland={setSelectedIsland}
-            scale={300}
-          />
-          <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-white to-transparent pointer-events-none" />
+        <div className="relative w-full mt-20" style={{ height: 700 }}>
+          <div className="absolute top-36">
+            <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-white to-transparent pointer-events-none" />
+            <BubbleMap
+              data={geoData}
+              width={600}
+              height={600}
+              selectedIsland={undefined}
+              setSelectedIsland={setSelectedIsland}
+              scale={300}
+            />
+          </div>
           <div className="absolute top-0 right-0">
             <span className="uppercase font-thin text-2xl text-gray-800">
               A look at gender inequality
             </span>
-
-            <h1 className="text-7xl">Women in the Pacific</h1>
+            <h1 className="text-7xl mt-2">Women in the Pacific</h1>
+            <p>
+              We crunched the data so that you don't have to. Here is what we
+              found about gender inequality in 7 islands of the Pacific. Lorem
+              ipsum some more text should go here my friend.
+            </p>
           </div>
-        </div>
-        <div className="w-full flex justify-center">
-          <p className="italic text-sm">
-            A project by Yan <a href="https://www.yan-holtz.com">Holtz</a> and
-            Joseph <a href="">Barbier</a>
-          </p>
+          <div className="absolute bottom-0 w-full flex justify-center">
+            <div className="text-center">
+              <p className="italic text-sm">
+                A project by Yan <a href="https://www.yan-holtz.com">Holtz</a>{" "}
+                and Joseph <a href="">Barbier</a>
+              </p>
+              <span className="italic text-sm text-gray-400">July 2024</span>
+            </div>
+          </div>
         </div>
 
         <div className="h-10" />
-        <p>Here we explain in a few words the result of our investigation</p>
 
         <h2>Women DO study</h2>
 
@@ -131,6 +139,8 @@ export default function Home() {
 
         {islandSelectButtons}
       </div>
+
+      <div ref={minimapRef} />
 
       <div className="w-full flex gap-2 justify-center">
         <Lollipop
@@ -171,7 +181,6 @@ export default function Home() {
             // .filter((item) => item.Occupation === "All occupations")
           }
         />
-        <div ref={minimapRef} />
 
         <h2>And work less</h2>
         <p>Evolution of unemployment rate</p>
