@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EducationLevel } from "./types";
+import { EducationLevel, Island } from "./types";
 import { scaleOrdinal } from "d3-scale";
 
 export function cn(...inputs: ClassValue[]) {
@@ -38,7 +38,12 @@ export const educationLevelItems: { label: string; value: EducationLevel }[] = [
   },
 ];
 
-export const islandCoordinates = [
+type IslandItem = {
+  name: Island,
+  coordinates: [number, number]
+}
+
+export const islandCoordinates: IslandItem[] = [
   {
     name: "Kiribati",
     coordinates: [

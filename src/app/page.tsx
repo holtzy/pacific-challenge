@@ -74,7 +74,13 @@ export default function Home() {
           <li>3rd level of one-liners : 20 gold coins</li>
         </ul>
 
-        <BubbleMap data={geoData} width={400} height={250} />
+        <BubbleMap
+          data={geoData}
+          width={400}
+          height={250}
+          selectedIsland={selectedIsland}
+          setSelectedIsland={setSelectedIsland}
+        />
 
         <p>
           As a result, people stopped telling jokes, and the kingdom fell into a
