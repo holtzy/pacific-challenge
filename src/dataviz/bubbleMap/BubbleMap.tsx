@@ -1,7 +1,8 @@
 import { Island } from "@/lib/types";
-import { islandCoordinates } from "@/lib/utils";
+import { islandColorScale, islandCoordinates } from "@/lib/utils";
 import { geoMercator, geoOrthographic, geoPath } from "d3-geo";
 import { FeatureCollection } from "geojson";
+import { CircleItem } from "./CircleItem";
 
 type BubbleMapProps = {
   width: number;
@@ -43,20 +44,20 @@ export const BubbleMap = ({
   const allBubbles = islandCoordinates.map((island) => {
     const [x, y] = projection(island.coordinates);
 
-    const color = selectedIsland
-      ? selectedIsland === island.name
-        ? "red"
-        : "grey"
-      : "blue";
+    const color = selectedIsland ? "grey" : islandColorScale(island.name);
+
+    if (island.name === selectedIsland) {
+      return null;
+    }
 
     return (
       <circle
         key={island.name}
         cx={x}
         cy={y}
-        r={10}
+        r={selectedIsland === island.name ? 10 : 6}
         fill={color}
-        fillOpacity={0.1}
+        fillOpacity={0.4}
         stroke={color}
         onClick={() => {
           setSelectedIsland(island.name);
@@ -66,11 +67,30 @@ export const BubbleMap = ({
     );
   });
 
+  const selectedIslandItem = islandCoordinates.find(
+    (island) => island.name === selectedIsland
+  );
+  const selectedCoord = projection(selectedIslandItem.coordinates);
+
+  const selectedBubble = (
+    <CircleItem
+      x={selectedCoord[0]}
+      y={selectedCoord[1]}
+      r={10}
+      color={islandColorScale(selectedIsland)}
+      onClick={() => {
+        setSelectedIsland(island.name);
+      }}
+      cursor={"pointer"}
+    />
+  );
+
   return (
     <div>
       <svg width={width} height={height}>
         {allSvgPaths}
         {allBubbles}
+        {selectedBubble}
       </svg>
     </div>
   );

@@ -45,6 +45,16 @@ export default function Home() {
         className="container mx-auto px-4 py-6 "
         style={{ maxWidth: CONTAINER_WIDTH }}
       >
+        <div className="fixed top-2 right-2 border border-gray-200 rounded-md h-72 w-72 overflow-hidden">
+          <BubbleMap
+            data={geoData}
+            width={300}
+            height={300}
+            selectedIsland={selectedIsland}
+            setSelectedIsland={setSelectedIsland}
+          />
+        </div>
+
         <h1>Women in the Pacific</h1>
 
         <p className="italic text-sm">
