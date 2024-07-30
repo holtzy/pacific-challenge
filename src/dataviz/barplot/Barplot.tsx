@@ -53,7 +53,7 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
                 : xScale(1) - xScale(d.OBS_VALUE)
             }
             height={yScale.bandwidth()}
-            opacity={0.7}
+            opacity={hovered ? 0.1 : 1}
             stroke={islandColorScale(d.Location)}
             fill={islandColorScale(d.Location)}
             fillOpacity={0.8}
@@ -78,11 +78,13 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
           <circle
             cx={xScale(d.OBS_VALUE)}
             cy={y + yScale.bandwidth() / 2}
-            r={4}
-            opacity={0.7}
+            r={hovered ? (hovered.name === d.Occupation ? 6 : 1) : 4}
+            opacity={hovered ? (hovered.name === d.Occupation ? 1 : 0.05) : 0.7}
             stroke={islandColorScale(d.Location)}
             fill={islandColorScale(d.Location)}
-            fillOpacity={0.3}
+            fillOpacity={
+              hovered ? (hovered.name === d.Occupation ? 1 : 0.05) : 0.7
+            }
             strokeWidth={1}
             rx={1}
             onMouseEnter={() =>

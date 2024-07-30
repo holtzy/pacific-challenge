@@ -1,28 +1,21 @@
-import {
-  AgeGroup,
-  EducationLevel,
-  EducationLevelItem,
-  Island,
-  Sex,
-  allEducationLevels,
-  allIslandNames,
-} from "@/lib/types";
+import { EducationLevelItem, allEducationLevels } from "@/lib/types";
 import { educationLevelItems, sexColorScale } from "@/lib/utils";
 import { extent, max } from "d3-array";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { useMemo } from "react";
 import { DumbbellItem } from "./DumbbellItem";
+import { AXIS_COLOR, AXIS_FONT_SIZE } from "../constant";
 
 const MARGIN = { top: 30, right: 30, bottom: 30, left: 150 };
-const BAR_PADDING = 0.3;
 
 type LollipopProps = {
   width: number;
   height: number;
   data: EducationLevelItem[];
+  title: string;
 };
 
-export const Lollipop = ({ width, height, data }: LollipopProps) => {
+export const Lollipop = ({ width, height, data, title }: LollipopProps) => {
   // bounds = area inside the graph axis = calculated by substracting the margins
   const boundsWidth = width - MARGIN.right - MARGIN.left;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
@@ -103,6 +96,73 @@ export const Lollipop = ({ width, height, data }: LollipopProps) => {
     );
   });
 
+  const svgTitle = (
+    <text
+      x={boundsWidth}
+      y={-10}
+      fill={"black"}
+      textAnchor="end"
+      alignmentBaseline="central"
+      fontSize={12}
+    >
+      {title}
+    </text>
+  );
+
+  const xAxisTitle = (
+    <>
+      <text
+        x={boundsWidth - 84}
+        y={boundsHeight + 40}
+        fill={AXIS_COLOR}
+        fontSize={AXIS_FONT_SIZE}
+      >
+        Ratio of the gross earnings
+      </text>
+      <text
+        x={boundsWidth - 84}
+        y={boundsHeight + 52}
+        fill={AXIS_COLOR}
+        fontSize={AXIS_FONT_SIZE}
+      >
+        between women and men
+      </text>
+    </>
+  );
+
+  const sexAnnotationTarget = data.filter(
+    (d) =>
+      xScale(d.female) > boundsWidth / 4 &&
+      xScale(d.male) > boundsWidth / 4 &&
+      xScale(d.female) < (boundsWidth * 3) / 4 &&
+      xScale(d.male) < (boundsWidth * 3) / 4
+  )[0];
+  const isMaleOver = sexAnnotationTarget?.male > sexAnnotationTarget?.female;
+  const sexAnnotation = (
+    <>
+      <text
+        x={xScale(sexAnnotationTarget?.male) + (isMaleOver ? 10 : -10)}
+        y={yScale(sexAnnotationTarget?.level) + yScale.bandwidth() / 2}
+        fill={sexColorScale("Male")}
+        alignmentBaseline="middle"
+        textAnchor={isMaleOver ? "start" : "end"}
+        fontSize={12}
+      >
+        {"Male"}
+      </text>
+      <text
+        x={xScale(sexAnnotationTarget?.female) + (isMaleOver ? -10 : +10)}
+        y={yScale(sexAnnotationTarget?.level) + yScale.bandwidth() / 2}
+        fill={sexColorScale("Female")}
+        alignmentBaseline="middle"
+        textAnchor={isMaleOver ? "end" : "start"}
+        fontSize={12}
+      >
+        {"Female"}
+      </text>
+    </>
+  );
+
   return (
     <div>
       <svg width={width} height={height} overflow={""}>
@@ -114,6 +174,9 @@ export const Lollipop = ({ width, height, data }: LollipopProps) => {
           {grid}
           {yAxis}
           {allShapes}
+          {svgTitle}
+          {xAxisTitle}
+          {sexAnnotation}
         </g>
       </svg>
     </div>

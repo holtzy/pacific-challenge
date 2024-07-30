@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const sexColorScale = scaleOrdinal<string>()
+export const sexColorScale = scaleOrdinal()
   .domain(["Female", "Male"])
   .range(["#9d174d", "#60b3a2"]);
 

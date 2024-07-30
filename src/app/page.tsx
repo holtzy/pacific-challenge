@@ -193,25 +193,26 @@ export default function Home() {
           men.
         </p>
         {/* ////////////////////// BARPLOT */}
-        <h2>But they are poorer</h2>
+        <h2>Women earn less on average</h2>
         <p>
           Wage differences between men and women are a notorious indicator of
           gender inequality.
         </p>
         <p>
-          Our study provides access to the gross earnings ratio between women
-          and men for six of the seven islands (data for Nauru is missing). This
-          ratio indicates how much women earn compared to men: a value above 1
-          means women earn more, while a value below 1 means they earn less.
+          Our study provides access to the gross <b>earnings ratio</b> between
+          women and men for six of the seven islands (data for Nauru is
+          missing). This ratio indicates how much women earn compared to men: a
+          value <b>above 1</b> means women earn more, while a value{" "}
+          <b>below 1</b> means they earn less.
         </p>
         <p>
           The data is categorized by occupation type. In the graph below, each
           circle represents an occupation type, and the bar represents the
-          overall data for all occupations combined.
+          overall data for <b>all occupations combined</b>.
         </p>
         <p>
           In the majority of the geographic zones (4 out of 6), the ratio is
-          below 1, indicating that women earn less than men.
+          below 1, indicating that women <b>earn less</b> than men.
         </p>
         <Barplot
           width={600}
@@ -221,24 +222,70 @@ export default function Home() {
             // .filter((item) => item.Occupation === "All occupations")
           }
         />
+        <p className="caption">
+          Fig 2: Gross earning ratio between women and men. Represented for all
+          occupations (bars) and split by occupations (circles). Data: Gender
+          pay gap in wages (
+          <a href="https://stats.pacificdata.org/vis?tm=wage&pg=0&snb=5&df[ds]=ds%3ASPC2&df[id]=DF_GWG&df[ag]=SPC&df[vs]=1.0&pd=%2C&dq=A......&to[TIME_PERIOD]=false">
+            link
+          </a>
+          )
+        </p>
         <p>
           However, in Kiribati and the Marshall Islands, the ratio is above 1,
           suggesting that women earn more than men in these areas. This
           surprising result conflicts with some other studies on the topic,
           indicating a need for further exploration of the data.
         </p>
+        <p>
+          It's worth noting that certain work categories deviate from this
+          pattern: in elementary occupations and craft and related trades, women
+          consistently earn less than men.
+        </p>
         {/* ////////////////////// LOLLIPOP */}
-        <h2>Women DO study</h2>
+        <h2>Education: The Root Cause?</h2>
         <p>
-          Educational attainment varies from 1 island to the other. For
-          instance, most of the people reach the primary school in Vanuatu, when
-          most of the people go until upper secondary school in Nauru.
+          A potential explanation for gender inequality could be{" "}
+          <b>educational attainment</b>. However, the data does not support this
+          theory.
         </p>
         <p>
-          Educational attainment is globally stable with a few notable
-          exceptions. For instance, in Kiribati, most people aged 55-54 went to
-          lower 2nd when youger people (aged 25-54) reached the upper 2nd.
+          Educational attainment varies across the islands. For example, in{" "}
+          <a
+            onClick={() => {
+              setSelectedIsland("Vanuatu");
+            }}
+            className="cursor-pointer"
+          >
+            Vanuatu
+          </a>
+          , most people complete primary school, whereas in{" "}
+          <a
+            onClick={() => {
+              setSelectedIsland("Nauru");
+            }}
+            className="cursor-pointer"
+          >
+            Nauru
+          </a>
+          , the majority reach upper secondary school.
         </p>
+        <p>
+          Overall, educational attainment is stable, with some notable
+          exceptions. In{" "}
+          <a
+            onClick={() => {
+              setSelectedIsland("Kiribati");
+            }}
+            className="cursor-pointer"
+          >
+            Kiribati
+          </a>
+          , for instance, most people aged 55-64 (right graph) only completed
+          lower secondary school, while younger individuals (aged 25-54, left
+          graph) reached upper secondary school.
+        </p>
+        <br />
         {islandSelectButtons}
       </div>
 
@@ -251,6 +298,7 @@ export default function Home() {
           data={educationLevelData
             .filter((d) => d.island === selectedIsland)
             .filter((d) => d.age === "25-54")}
+          title="Age Range: 25-54"
         />
 
         <Lollipop
@@ -259,6 +307,7 @@ export default function Home() {
           data={educationLevelData
             .filter((d) => d.island === selectedIsland)
             .filter((d) => d.age === "55-64")}
+          title="Age Range: 55-64"
         />
       </div>
 
@@ -267,7 +316,7 @@ export default function Home() {
         style={{ maxWidth: CONTAINER_WIDTH }}
       >
         <p className="caption">
-          Fig 1.1 and 1.2: educational attainment in {selectedIsland}.
+          Fig 3.1 and 3.2: educational attainment in {selectedIsland}.
         </p>
       </div>
     </main>

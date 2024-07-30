@@ -52,8 +52,8 @@ export const DumbbellItem = (props: DumbbellItemProps) => {
         cy={springProps.y}
         cx={springProps.xValue1}
         opacity={0.7}
-        stroke={sexColorScale("male")}
-        fill={sexColorScale("male")}
+        stroke={sexColorScale("Male")}
+        fill={sexColorScale("Male")}
         strokeWidth={1}
         r={5}
       />
@@ -61,20 +61,11 @@ export const DumbbellItem = (props: DumbbellItemProps) => {
         cy={springProps.y}
         cx={springProps.xValue2}
         opacity={0.7}
-        stroke={sexColorScale("female")}
-        fill={sexColorScale("female")}
+        stroke={sexColorScale("Female")}
+        fill={sexColorScale("Female")}
         strokeWidth={1}
         r={5}
       />
-      <animated.text
-        x={-7}
-        y={springProps.y}
-        textAnchor="end"
-        alignmentBaseline="central"
-        fontSize={12}
-      >
-        {""}
-      </animated.text>
     </g>
   );
 };
