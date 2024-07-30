@@ -1,7 +1,8 @@
 import { GenderPayGapItem, allIslandNames } from "@/lib/types";
 import { islandColorScale } from "@/lib/utils";
 import { scaleBand, scaleLinear } from "d3-scale";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { InteractionData, Tooltip } from "./Tooltip";
 
 const MARGIN = { top: 30, right: 30, bottom: 30, left: 30 };
 
@@ -15,6 +16,8 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
   // bounds = area inside the graph axis = calculated by substracting the margins
   const boundsWidth = width - MARGIN.right - MARGIN.left;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
+
+  const [hovered, setHovered] = useState<InteractionData | null>(null);
 
   // Y axis is for groups since the barplot is horizontal;
   const yScale = useMemo(() => {
@@ -60,29 +63,40 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
       );
     });
 
-  const allCircles = data.map((d, i) => {
-    const y = yScale(d.Location);
+  const allCircles = data
+    .filter((d) => d.Occupation !== "All occupations")
+    .map((d, i) => {
+      const y = yScale(d.Location);
 
-    if (y === undefined) {
-      return null;
-    }
+      if (y === undefined) {
+        return null;
+      }
 
-    return (
-      <g key={i}>
-        <circle
-          cx={xScale(d.OBS_VALUE)}
-          cy={yScale(d.Location) + yScale.bandwidth() / 2}
-          r={4}
-          opacity={0.7}
-          stroke={islandColorScale(d.Location)}
-          fill={islandColorScale(d.Location)}
-          fillOpacity={0.3}
-          strokeWidth={1}
-          rx={1}
-        />
-      </g>
-    );
-  });
+      return (
+        <g key={i}>
+          <circle
+            cx={xScale(d.OBS_VALUE)}
+            cy={y + yScale.bandwidth() / 2}
+            r={4}
+            opacity={0.7}
+            stroke={islandColorScale(d.Location)}
+            fill={islandColorScale(d.Location)}
+            fillOpacity={0.3}
+            strokeWidth={1}
+            rx={1}
+            onMouseEnter={() =>
+              setHovered({
+                xPos: xScale(d.OBS_VALUE),
+                yPos: y + yScale.bandwidth() / 2,
+                name: d.Occupation,
+              })
+            }
+            onMouseLeave={() => setHovered(null)}
+            cursor={"pointer"}
+          />
+        </g>
+      );
+    });
 
   const grid = xScale
     .ticks(5)
@@ -112,7 +126,7 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
     ));
 
   return (
-    <div>
+    <div className="relative">
       <svg width={width} height={height}>
         <g
           width={boundsWidth}
@@ -124,6 +138,22 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
           {allCircles}
         </g>
       </svg>
+
+      {/* Tooltip */}
+      <div
+        style={{
+          width: boundsWidth,
+          height: boundsHeight,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          pointerEvents: "none",
+          marginLeft: MARGIN.left,
+          marginTop: MARGIN.top,
+        }}
+      >
+        <Tooltip interactionData={hovered} />
+      </div>
     </div>
   );
 };
