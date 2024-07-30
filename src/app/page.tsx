@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <main>
-      {/* {isMinimapEnabled && (
+      {isMinimapEnabled && (
         <div className="fixed top-2 right-2 border border-gray-200 rounded-md h-44 w-44 overflow-hidden">
           <BubbleMap
             data={geoData}
@@ -79,7 +79,7 @@ export default function Home() {
             bubbleSize={7}
           />
         </div>
-      )} */}
+      )}
 
       {/* ////////////////////// TITLE SECTION */}
       <div
@@ -96,7 +96,7 @@ export default function Home() {
               selectedIsland={undefined}
               setSelectedIsland={setSelectedIsland}
               scale={300}
-              bubbleSize={20}
+              bubbleSize={16}
             />
           </div>
 
@@ -318,6 +318,50 @@ export default function Home() {
         <p className="caption">
           Fig 3.1 and 3.2: educational attainment in {selectedIsland}.
         </p>
+
+        <h2>Conclusion</h2>
+        <p>
+          Despite advances in education, gender inequality remains pronounced in
+          the Pacific Islands, with women earning less and holding fewer
+          managerial positions than men.
+        </p>
+        <p>
+          The wage gap persists across various occupations, and educational
+          attainment alone does not account for these disparities.
+        </p>
+        <p>
+          Addressing this issue requires a deeper examination of structural and
+          cultural factors beyond education.
+        </p>
+
+        <h2>Material and Method</h2>
+        <p>
+          This project is built with{" "}
+          <a href="https://www.react-graph-gallery.com">React</a> and{" "}
+          <a href="https://www.d3-graph-gallery.com">D3.js</a>, with graphs
+          inspired by the{" "}
+          <a href="https://www.react-graph-gallery.com">React Graph Gallery</a>.
+          Styling is handled using Tailwind CSS and{" "}
+          <a href="https://ui.shadcn.com">ShadcnUI</a> components. The source
+          code is available on{" "}
+          <a href="https://github.com/holtzy/pacific-challenge">GitHub</a>.
+        </p>
+        <p>
+          The data is sourced from the{" "}
+          <a href="https://pacificdata.org"> Pacific Data Hub</a>, and the exact
+          datasets are linked in the captions of each chart.
+        </p>
+        <p>
+          This is a project made by{" "}
+          <a href="https://www.yan-holtz.com">Yan Holtz</a> for the{" "}
+          <a href="https://pacificdatavizchallenge.org/">
+            Pacific Data Challenge
+          </a>
+          .
+        </p>
+        <div className="flex my-24 justify-center w-full">
+          <img src="favicon.ico" width={100} />
+        </div>
       </div>
     </main>
   );
