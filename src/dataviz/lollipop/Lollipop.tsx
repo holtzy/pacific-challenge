@@ -79,11 +79,12 @@ export const Lollipop = ({ width, height, data, title }: LollipopProps) => {
       </g>
     ));
 
-  const yAxis = allEducationLevels.map((ed) => {
+  const yAxis = allEducationLevels.map((ed, i) => {
     const label = educationLevelItems.find((e) => e.value === ed)?.label;
 
     return (
       <text
+        key={i}
         x={xScale(0) - 10}
         y={yScale(ed) + yScale.bandwidth() / 2}
         fill={"black"}

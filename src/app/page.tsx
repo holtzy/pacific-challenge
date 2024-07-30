@@ -19,7 +19,7 @@ export default function Home() {
   const [isMinimapEnabled, setIsMinimapEnabled] = useState(false);
 
   const [selectedIsland, setSelectedIsland] = useState<Island | undefined>(
-    undefined
+    "Kiribati"
   );
 
   const minimapRef = useRef(null);
@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <main>
-      {isMinimapEnabled && (
+      {/* {isMinimapEnabled && (
         <div className="fixed top-2 right-2 border border-gray-200 rounded-md h-44 w-44 overflow-hidden">
           <BubbleMap
             data={geoData}
@@ -79,7 +79,7 @@ export default function Home() {
             bubbleSize={7}
           />
         </div>
-      )}
+      )} */}
 
       {/* ////////////////////// TITLE SECTION */}
       <div
@@ -99,6 +99,7 @@ export default function Home() {
               bubbleSize={20}
             />
           </div>
+
           <div className="absolute top-0 right-0">
             <span className="uppercase font-thin text-2xl text-gray-800">
               A look at gender inequality
@@ -192,6 +193,7 @@ export default function Home() {
           employed, let's now examine if there are wage disparities compared to
           men.
         </p>
+        <div ref={minimapRef} />
         {/* ////////////////////// BARPLOT */}
         <h2>Women earn less on average</h2>
         <p>
@@ -288,8 +290,6 @@ export default function Home() {
         <br />
         {islandSelectButtons}
       </div>
-
-      <div ref={minimapRef} />
 
       <div className="w-full flex gap-2 justify-center">
         <Lollipop

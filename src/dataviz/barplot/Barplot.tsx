@@ -168,9 +168,10 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
     </>
   );
 
-  const yAxisTitle = allIslandNames.map((islandName) => {
+  const yAxisTitle = allIslandNames.map((islandName, i) => {
     return (
       <text
+        key={i}
         x={20}
         y={yScale(islandName) + yScale.bandwidth() / 2}
         fill={islandColorScale(islandName)}

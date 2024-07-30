@@ -1,3 +1,5 @@
+"use client";
+
 import { Island } from "@/lib/types";
 import { islandColorScale, islandCoordinates } from "@/lib/utils";
 import { geoMercator, geoOrthographic, geoPath } from "d3-geo";
@@ -58,12 +60,18 @@ export const BubbleMap = ({
         ? islandColorScale(island.name)
         : "black";
 
+    const r =
+      selectedIsland === island.name || !selectedIsland
+        ? bubbleSize * 2
+        : bubbleSize;
+
+    console.log("r", r);
     return (
       <CircleItem
         key={island.name}
         x={x}
         y={y}
-        r={selectedIsland === island.name ? bubbleSize * 2 : bubbleSize}
+        r={r}
         color={color}
         onClick={() => {
           setSelectedIsland(island.name);

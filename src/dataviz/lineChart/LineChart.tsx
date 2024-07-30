@@ -40,9 +40,8 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
   // Circles
   const allCircles = data.map((d, i) => {
     return (
-      <>
+      <g key={i}>
         <CircleItem
-          key={i}
           x={xScale(d.TIME_PERIOD)}
           y={yScale(d.OBS_VALUE)}
           color={sexColorScale(d.Sex)}
@@ -58,7 +57,7 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
             {d.Sex}
           </text>
         )}
-      </>
+      </g>
     );
   });
 
