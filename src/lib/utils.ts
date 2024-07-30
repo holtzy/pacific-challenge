@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const sexColorScale = scaleOrdinal<string>()
-  .domain(["Male", "Female"])
+  .domain(["Female", "Male"])
   .range(["#9d174d", "#60b3a2"]);
 
 

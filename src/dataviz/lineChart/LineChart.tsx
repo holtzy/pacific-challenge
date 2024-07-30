@@ -3,6 +3,8 @@ import { sexColorScale } from "@/lib/utils";
 import { scaleLinear } from "d3-scale";
 import { line } from "d3-shape";
 import { useRef } from "react";
+import { CircleItem } from "./CircleItem";
+import { AXIS_COLOR, AXIS_FONT_SIZE } from "../constant";
 
 const MARGIN = { top: 30, right: 30, bottom: 50, left: 50 };
 
@@ -34,13 +36,13 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
   const linePathFemale = lineBuilder(data.filter((d) => d.Sex === "Female"));
 
   // Circles
-  const allCircles = data.map((d) => {
+  const allCircles = data.map((d, i) => {
     return (
-      <circle
-        cx={xScale(d.TIME_PERIOD)}
-        cy={yScale(d.OBS_VALUE)}
-        r={3}
-        fill={sexColorScale(d.Sex)}
+      <CircleItem
+        key={i}
+        x={xScale(d.TIME_PERIOD)}
+        y={yScale(d.OBS_VALUE)}
+        color={sexColorScale(d.Sex)}
       />
     );
   });
@@ -52,17 +54,17 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
         x2={xScale(value)}
         y1={boundsHeight}
         y2={boundsHeight + 4}
-        stroke="#808080"
+        stroke={AXIS_COLOR}
         opacity={0.2}
+        shapeRendering="crispEdges"
       />
       <text
         x={xScale(value)}
         y={boundsHeight + 10}
         textAnchor="middle"
         alignmentBaseline="central"
-        fontSize={9}
-        stroke="#808080"
-        opacity={0.8}
+        fontSize={AXIS_FONT_SIZE}
+        fill={AXIS_COLOR}
       >
         {value}
       </text>
@@ -76,16 +78,17 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
         x2={boundsWidth}
         y1={yScale(value)}
         y2={yScale(value)}
-        stroke="#808080"
+        stroke={AXIS_COLOR}
         opacity={0.2}
+        shapeRendering="crispEdges"
       />
       <text
         x={-20}
         y={yScale(value)}
         textAnchor={"middle"}
         alignmentBaseline="central"
-        fontSize={9}
-        fill="black"
+        fontSize={AXIS_FONT_SIZE}
+        fill={AXIS_COLOR}
         opacity={1}
       >
         {value}
@@ -93,9 +96,45 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
     </g>
   ));
 
+  const xAxisTitle = (
+    <>
+      <text
+        x={boundsWidth - 10}
+        y={boundsHeight + 40}
+        fill={AXIS_COLOR}
+        fontSize={AXIS_FONT_SIZE}
+      >
+        Year
+      </text>
+    </>
+  );
+
+  const yAxisTitle = (
+    <>
+      <text
+        x={-45}
+        y={30}
+        fill={AXIS_COLOR}
+        fontSize={AXIS_FONT_SIZE}
+        textAnchor="end"
+      >
+        Number of employed
+      </text>
+      <text
+        x={-45}
+        y={45}
+        fill={AXIS_COLOR}
+        fontSize={AXIS_FONT_SIZE}
+        textAnchor="end"
+      >
+        persons
+      </text>
+    </>
+  );
+
   return (
     <div>
-      <svg width={width} height={height}>
+      <svg width={width} height={height} overflow="visible">
         <g
           width={boundsWidth}
           height={boundsHeight}
@@ -103,6 +142,8 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
         >
           {grid}
           {yGrid}
+          {xAxisTitle}
+          {yAxisTitle}
           <path
             d={linePathMale}
             opacity={1}

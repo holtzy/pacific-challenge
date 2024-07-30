@@ -3,12 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { data } from "@/data/data";
 import { educationLevelData } from "@/data/education-level";
 import { Barplot } from "@/dataviz/barplot/Barplot";
 import { Lollipop } from "@/dataviz/lollipop/Lollipop";
-import { EducationLevel, Island, allIslandNames } from "@/lib/types";
-import { educationLevelItems, islandColorScale } from "@/lib/utils";
+import { Island, allIslandNames } from "@/lib/types";
 import { BubbleMap } from "@/dataviz/bubbleMap/BubbleMap";
 import { geoData } from "@/data/pacific";
 import { genderPayGap } from "@/data/gender-pay-gap";
@@ -18,12 +16,11 @@ import { employmentRates } from "@/data/employment_yh";
 const CONTAINER_WIDTH = 600;
 
 export default function Home() {
-  const [educationLevel, setEducationLevel] =
-    useState<EducationLevel>("Primary education");
-
   const [isMinimapEnabled, setIsMinimapEnabled] = useState(false);
 
-  const [selectedIsland, setSelectedIsland] = useState<Island>("Vanuatu");
+  const [selectedIsland, setSelectedIsland] = useState<Island | undefined>(
+    undefined
+  );
 
   const minimapRef = useRef(null);
 
@@ -70,23 +67,25 @@ export default function Home() {
 
   return (
     <main>
+      {isMinimapEnabled && (
+        <div className="fixed top-2 right-2 border border-gray-200 rounded-md h-44 w-44 overflow-hidden">
+          <BubbleMap
+            data={geoData}
+            width={176}
+            height={176}
+            selectedIsland={selectedIsland}
+            setSelectedIsland={setSelectedIsland}
+            scale={100}
+            bubbleSize={7}
+          />
+        </div>
+      )}
+
+      {/* ////////////////////// TITLE SECTION */}
       <div
         className="container mx-auto px-4 py-6 "
         style={{ maxWidth: CONTAINER_WIDTH }}
       >
-        {isMinimapEnabled && (
-          <div className="fixed top-2 right-2 border border-gray-200 rounded-md h-44 w-44 overflow-hidden">
-            <BubbleMap
-              data={geoData}
-              width={176}
-              height={176}
-              selectedIsland={selectedIsland}
-              setSelectedIsland={setSelectedIsland}
-              scale={100}
-            />
-          </div>
-        )}
-
         <div className="relative w-full mt-20" style={{ height: 700 }}>
           <div className="absolute top-36">
             <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-white to-transparent pointer-events-none" />
@@ -97,6 +96,7 @@ export default function Home() {
               selectedIsland={undefined}
               setSelectedIsland={setSelectedIsland}
               scale={300}
+              bubbleSize={20}
             />
           </div>
           <div className="absolute top-0 right-0">
@@ -105,9 +105,10 @@ export default function Home() {
             </span>
             <h1 className="text-7xl mt-2">Women in the Pacific</h1>
             <p>
-              We crunched the data so that you don't have to. Here is what we
-              found about gender inequality in 7 islands of the Pacific. Lorem
-              ipsum some more text should go here my friend.
+              Gender inequality persists in the Pacific islands, where women{" "}
+              <b>work</b> less, <b>earn</b> slightly less, and have fewer{" "}
+              <b>managerial</b> roles than men. This essay explores these
+              disparities, despite women's strong access to <b>education</b>.
             </p>
           </div>
           <div className="absolute bottom-0 w-full flex justify-center">
@@ -120,23 +121,83 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="h-10" />
+      <div className="h-10" />
 
+      {/* ////////////////////// LINE CHART SECTION */}
+      <div
+        className="container mx-auto px-4 py-6 "
+        style={{ maxWidth: CONTAINER_WIDTH }}
+      >
+        <h2>Women are consistently less employed </h2>
+        <p>
+          The number of employed women is <b>consistently lower</b> than that of
+          men across all geographic zones and recorded years in our dataset.
+        </p>
+        <p>
+          This disparity is significant, with most zones — except{" "}
+          <a
+            onClick={() => {
+              setSelectedIsland("Vanuatu");
+            }}
+            className="cursor-pointer"
+          >
+            Vanuatu
+          </a>{" "}
+          and{" "}
+          <a
+            onClick={() => {
+              setSelectedIsland("Tonga");
+            }}
+            className="cursor-pointer"
+          >
+            Tonga
+          </a>{" "}
+          — showing over 50% more employed men than women.
+        </p>
+        <p>
+          In the{" "}
+          <a
+            onClick={() => {
+              setSelectedIsland("Marshall Islands");
+            }}
+            className="cursor-pointer"
+          >
+            Marshall Islands
+          </a>{" "}
+          , the gap is even more pronounced, with twice as many men employed
+          compared to women.
+        </p>
+        <br />
+        {islandSelectButtons}
+        <LineChart
+          width={600}
+          height={400}
+          data={employmentRates
+            .filter((d) => d.island === selectedIsland)
+            .filter((d) => d.Sex !== "Total")}
+        />{" "}
+        <p className="caption">
+          Fig 1: Number of employed men and women in {selectedIsland}. Data:
+          Employed population by economic sector (
+          <a href="https://stats.pacificdata.org/vis?lc=en&df[ds]=SPC2&df[id]=DF_EMPLOYED_SECTOR&df[ag]=SPC&df[vs]=1.0&av=true&pd=%2C&dq=A...._T._T._T._T&ly[cl]=SEX&to[TIME_PERIOD]=false&vw=tb">
+            link
+          </a>
+          )
+        </p>
+        {/* ////////////////////// LOLLIPOP */}
         <h2>Women DO study</h2>
-
         <p>
           Educational attainment varies from 1 island to the other. For
           instance, most of the people reach the primary school in Vanuatu, when
           most of the people go until upper secondary school in Nauru.
         </p>
-
         <p>
           Educational attainment is globally stable with a few notable
           exceptions. For instance, in Kiribati, most people aged 55-54 went to
           lower 2nd when youger people (aged 25-54) reached the upper 2nd.
         </p>
-
         {islandSelectButtons}
       </div>
 
@@ -183,17 +244,6 @@ export default function Home() {
             genderPayGap.filter((item) => item.Urbanization === "National")
             // .filter((item) => item.Occupation === "All occupations")
           }
-        />
-
-        <h2>And work less</h2>
-        <p>Evolution of unemployment rate</p>
-        {islandSelectButtons}
-        <LineChart
-          width={600}
-          height={500}
-          data={employmentRates
-            .filter((d) => d.island === selectedIsland)
-            .filter((d) => d.Sex !== "Total")}
         />
       </div>
     </main>

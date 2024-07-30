@@ -11,6 +11,7 @@ type BubbleMapProps = {
   selectedIsland: Island | undefined;
   setSelectedIsland: (newIsland: Island) => void;
   scale: number;
+  bubbleSize: number;
 };
 
 export const BubbleMap = ({
@@ -20,6 +21,7 @@ export const BubbleMap = ({
   selectedIsland,
   setSelectedIsland,
   scale,
+  bubbleSize,
 }: BubbleMapProps) => {
   const projection = geoOrthographic()
     .rotate([200, 5])
@@ -48,67 +50,33 @@ export const BubbleMap = ({
   // ALL ISLAND
   //
   //
-
   const allBubbles = islandCoordinates.map((island) => {
     const [x, y] = projection(island.coordinates);
 
-    const color = selectedIsland ? "grey" : islandColorScale(island.name);
-
-    if (island.name === selectedIsland) {
-      return null;
-    }
+    const color =
+      selectedIsland === island.name || !selectedIsland
+        ? islandColorScale(island.name)
+        : "black";
 
     return (
-      <circle
+      <CircleItem
         key={island.name}
-        cx={x}
-        cy={y}
-        r={selectedIsland === island.name ? 10 : 20}
-        fill={color}
-        fillOpacity={0.4}
-        stroke={color}
-        strokeWidth={1}
+        x={x}
+        y={y}
+        r={selectedIsland === island.name ? bubbleSize * 2 : bubbleSize}
+        color={color}
         onClick={() => {
           setSelectedIsland(island.name);
         }}
-        cursor={"pointer"}
       />
     );
   });
-
-  //
-  //
-  // SELECTED ISLAND
-  //
-  //
-  const selectedIslandItem = islandCoordinates.find(
-    (island) => island.name === selectedIsland
-  );
-
-  let selectedBubble = null;
-  if (selectedIsland && selectedIslandItem) {
-    const selectedCoord = projection(selectedIslandItem.coordinates);
-
-    selectedBubble = (
-      <CircleItem
-        x={selectedCoord?.[0]}
-        y={selectedCoord?.[1]}
-        r={10}
-        color={islandColorScale(selectedIsland)}
-        onClick={() => {
-          setSelectedIsland(island.name);
-        }}
-        cursor={"pointer"}
-      />
-    );
-  }
 
   return (
     <div>
       <svg width={width} height={height}>
         {allSvgPaths}
         {allBubbles}
-        {selectedBubble}
       </svg>
     </div>
   );
