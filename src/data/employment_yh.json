@@ -1,0 +1,443 @@
+[
+  {
+    "island": "Nauru",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2011,
+    "OBS_VALUE": 3008
+  },
+  {
+    "island": "Nauru",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2012,
+    "OBS_VALUE": 3893
+  },
+  {
+    "island": "Cook Islands",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 3710
+  },
+  {
+    "island": "Tokelau",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 547
+  },
+  {
+    "island": "Tokelau",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 241
+  },
+  {
+    "island": "Niue",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 414
+  },
+  {
+    "island": "Niue",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2017,
+    "OBS_VALUE": 411
+  },
+  {
+    "island": "Marshall Islands",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2011,
+    "OBS_VALUE": 7832
+  },
+  {
+    "island": "Marshall Islands",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2019,
+    "OBS_VALUE": 11009
+  },
+  {
+    "island": "Palau",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2013,
+    "OBS_VALUE": 3445
+  },
+  {
+    "island": "Palau",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 3574
+  },
+  {
+    "island": "Tuvalu",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 2801
+  },
+  {
+    "island": "Tuvalu",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2017,
+    "OBS_VALUE": 2453
+  },
+  {
+    "island": "Nauru",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2011,
+    "OBS_VALUE": 1166
+  },
+  {
+    "island": "Nauru",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2012,
+    "OBS_VALUE": 1462
+  },
+  {
+    "island": "Micronesia (Federated States of)",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2013,
+    "OBS_VALUE": 10176
+  },
+  {
+    "island": "Samoa",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2013,
+    "OBS_VALUE": 50730
+  },
+  {
+    "island": "Micronesia (Federated States of)",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2013,
+    "OBS_VALUE": 6488
+  },
+  {
+    "island": "Palau",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2013,
+    "OBS_VALUE": 8285
+  },
+  {
+    "island": "Palau",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 8998
+  },
+  {
+    "island": "Kiribati",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 10736
+  },
+  {
+    "island": "Kiribati",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2019,
+    "OBS_VALUE": 10216
+  },
+  {
+    "island": "Palau",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2013,
+    "OBS_VALUE": 4839
+  },
+  {
+    "island": "Palau",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 5424
+  },
+  {
+    "island": "Tuvalu",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 1041
+  },
+  {
+    "island": "Tuvalu",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2017,
+    "OBS_VALUE": 945
+  },
+  {
+    "island": "Tuvalu",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 1760
+  },
+  {
+    "island": "Tuvalu",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2017,
+    "OBS_VALUE": 1508
+  },
+  {
+    "island": "Niue",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 825
+  },
+  {
+    "island": "Niue",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2017,
+    "OBS_VALUE": 777
+  },
+  {
+    "island": "Marshall Islands",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2011,
+    "OBS_VALUE": 12035
+  },
+  {
+    "island": "Marshall Islands",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2019,
+    "OBS_VALUE": 16162
+  },
+  {
+    "island": "Cook Islands",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 7116
+  },
+  {
+    "island": "Tokelau",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 305
+  },
+  {
+    "island": "Cook Islands",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 3405
+  },
+  {
+    "island": "Tonga",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2016,
+    "OBS_VALUE": 25377
+  },
+  {
+    "island": "Tonga",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2018,
+    "OBS_VALUE": 28600
+  },
+  {
+    "island": "Tonga",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2021,
+    "OBS_VALUE": 27677
+  },
+  {
+    "island": "Solomon Islands",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2012,
+    "OBS_VALUE": 44717
+  },
+  {
+    "island": "Micronesia (Federated States of)",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2013,
+    "OBS_VALUE": 16664
+  },
+  {
+    "island": "Nauru",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2011,
+    "OBS_VALUE": 1842
+  },
+  {
+    "island": "Nauru",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2012,
+    "OBS_VALUE": 2431
+  },
+  {
+    "island": "Solomon Islands",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2012,
+    "OBS_VALUE": 128958
+  },
+  {
+    "island": "Tonga",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2016,
+    "OBS_VALUE": 9952
+  },
+  {
+    "island": "Tonga",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2018,
+    "OBS_VALUE": 12446
+  },
+  {
+    "island": "Tonga",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2021,
+    "OBS_VALUE": 12596
+  },
+  {
+    "island": "Marshall Islands",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2011,
+    "OBS_VALUE": 4203
+  },
+  {
+    "island": "Marshall Islands",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2019,
+    "OBS_VALUE": 5152
+  },
+  {
+    "island": "Niue",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 411
+  },
+  {
+    "island": "Niue",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2017,
+    "OBS_VALUE": 366
+  },
+  {
+    "island": "Vanuatu",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2019,
+    "OBS_VALUE": 84859
+  },
+  {
+    "island": "Kiribati",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 14624
+  },
+  {
+    "island": "Kiribati",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2019,
+    "OBS_VALUE": 14955
+  },
+  {
+    "island": "Kiribati",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2015,
+    "OBS_VALUE": 25360
+  },
+  {
+    "island": "Kiribati",
+    "Sex": "Total",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2019,
+    "OBS_VALUE": 25172
+  },
+  {
+    "island": "Vanuatu",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2019,
+    "OBS_VALUE": 38222
+  },
+  {
+    "island": "Vanuatu",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2019,
+    "OBS_VALUE": 46636
+  },
+  {
+    "island": "Samoa",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2013,
+    "OBS_VALUE": 33577
+  },
+  {
+    "island": "Tonga",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2016,
+    "OBS_VALUE": 15425
+  },
+  {
+    "island": "Tonga",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2018,
+    "OBS_VALUE": 16153
+  },
+  {
+    "island": "Tonga",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2021,
+    "OBS_VALUE": 15081
+  },
+  {
+    "island": "Solomon Islands",
+    "Sex": "Male",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2012,
+    "OBS_VALUE": 84240
+  },
+  {
+    "island": "Samoa",
+    "Sex": "Female",
+    "Urbanization": "National",
+    "TIME_PERIOD": 2013,
+    "OBS_VALUE": 17152
+  }
+]

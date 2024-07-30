@@ -3,8 +3,9 @@ import { islandColorScale } from "@/lib/utils";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { useMemo, useState } from "react";
 import { InteractionData, Tooltip } from "./Tooltip";
+import { AXIS_COLOR, AXIS_FONT_SIZE } from "../constant";
 
-const MARGIN = { top: 30, right: 30, bottom: 30, left: 30 };
+const MARGIN = { top: 60, right: 30, bottom: 80, left: 100 };
 
 type BarplotProps = {
   width: number;
@@ -108,22 +109,78 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
           x2={xScale(value)}
           y1={0}
           y2={boundsHeight}
-          stroke="#808080"
+          stroke={AXIS_COLOR}
           opacity={0.2}
+          shapeRendering="crispEdges"
         />
         <text
           x={xScale(value)}
           y={boundsHeight + 10}
           textAnchor="middle"
           alignmentBaseline="central"
-          fontSize={9}
-          stroke="#808080"
+          fontSize={AXIS_FONT_SIZE}
+          fill={AXIS_COLOR}
           opacity={0.8}
         >
           {value}
         </text>
       </g>
     ));
+
+  const xAxisTitle = (
+    <>
+      <text
+        x={boundsWidth - 84}
+        y={boundsHeight + 40}
+        fill={AXIS_COLOR}
+        fontSize={AXIS_FONT_SIZE}
+      >
+        Ratio of the gross earnings
+      </text>
+      <text
+        x={boundsWidth - 84}
+        y={boundsHeight + 52}
+        fill={AXIS_COLOR}
+        fontSize={AXIS_FONT_SIZE}
+      >
+        between women and men
+      </text>
+    </>
+  );
+
+  const topAnnotations = (
+    <>
+      <text
+        x={boundsWidth}
+        y={-10}
+        fill={"black"}
+        fontSize={15}
+        fontWeight={300}
+        textAnchor="end"
+      >
+        Women earn more
+      </text>
+      <text x={0} y={-10} fill={"black"} fontSize={15} fontWeight={300}>
+        Women earn less
+      </text>
+    </>
+  );
+
+  const yAxisTitle = allIslandNames.map((islandName) => {
+    return (
+      <text
+        x={20}
+        y={yScale(islandName) + yScale.bandwidth() / 2}
+        fill={islandColorScale(islandName)}
+        fontSize={15}
+        textAnchor="end"
+        alignmentBaseline="middle"
+        opacity={0.3}
+      >
+        {islandName}
+      </text>
+    );
+  });
 
   return (
     <div className="relative">
@@ -136,6 +193,9 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
           {grid}
           {allRects}
           {allCircles}
+          {xAxisTitle}
+          {yAxisTitle}
+          {topAnnotations}
         </g>
       </svg>
 

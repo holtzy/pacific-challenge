@@ -13,7 +13,7 @@ import { BubbleMap } from "@/dataviz/bubbleMap/BubbleMap";
 import { geoData } from "@/data/pacific";
 import { genderPayGap } from "@/data/gender-pay-gap";
 import { LineChart } from "@/dataviz/lineChart/LineChart";
-import { employmentRates } from "@/data/employment-rates";
+import { employmentRates } from "@/data/employment_yh";
 
 const CONTAINER_WIDTH = 600;
 
@@ -169,10 +169,13 @@ export default function Home() {
         </p>
 
         <h2>But they are poorer</h2>
+        <p>Women globally earn less than men.</p>
         <p>
-          Weird. The dataset has very contrasted result on pay gap. Good news
-          but kills the story. Ask Joseph: one column is missing.
+          The gross earnings ratio between women and men is available for 6 out
+          of the 7 islands of our study. In four of them, the ratio was below 1,
+          meaning that women earn less than men.
         </p>
+        <p>Interstingly, </p>
         <Barplot
           width={600}
           height={500}
@@ -189,8 +192,8 @@ export default function Home() {
           width={600}
           height={500}
           data={employmentRates
-            .filter((d) => d.age === "25-54")
-            .filter((d) => d.island === selectedIsland)}
+            .filter((d) => d.island === selectedIsland)
+            .filter((d) => d.Sex !== "Total")}
         />
       </div>
     </main>
