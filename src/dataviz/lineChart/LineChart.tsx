@@ -5,6 +5,7 @@ import { line } from "d3-shape";
 import { useRef } from "react";
 import { CircleItem } from "./CircleItem";
 import { AXIS_COLOR, AXIS_FONT_SIZE } from "../constant";
+import { LineItem } from "./LineItem";
 
 const MARGIN = { top: 30, right: 30, bottom: 50, left: 50 };
 
@@ -25,6 +26,7 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
     .range([boundsHeight, 0]);
 
   // X axis
+  const maxYear = Math.max(...data.map((item) => item.TIME_PERIOD));
   const xScale = scaleLinear().domain([2011, 2021]).range([0, boundsWidth]);
 
   // Build the line
@@ -38,12 +40,25 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
   // Circles
   const allCircles = data.map((d, i) => {
     return (
-      <CircleItem
-        key={i}
-        x={xScale(d.TIME_PERIOD)}
-        y={yScale(d.OBS_VALUE)}
-        color={sexColorScale(d.Sex)}
-      />
+      <>
+        <CircleItem
+          key={i}
+          x={xScale(d.TIME_PERIOD)}
+          y={yScale(d.OBS_VALUE)}
+          color={sexColorScale(d.Sex)}
+        />
+        {d.TIME_PERIOD === maxYear && (
+          <text
+            x={xScale(d.TIME_PERIOD) + 20}
+            y={yScale(d.OBS_VALUE)}
+            fill={sexColorScale(d.Sex)}
+            alignmentBaseline="middle"
+            fontSize={12}
+          >
+            {d.Sex}
+          </text>
+        )}
+      </>
     );
   });
 
@@ -144,20 +159,17 @@ export const LineChart = ({ width, height, data }: LineChartProps) => {
           {yGrid}
           {xAxisTitle}
           {yAxisTitle}
-          <path
-            d={linePathMale}
+          <LineItem
+            path={linePathMale}
             opacity={1}
-            stroke={sexColorScale("Male")}
-            fill="none"
-            strokeWidth={2}
+            color={sexColorScale("Male")}
           />
-          <path
-            d={linePathFemale}
+          <LineItem
+            path={linePathFemale}
             opacity={1}
-            stroke={sexColorScale("Female")}
-            fill="none"
-            strokeWidth={2}
+            color={sexColorScale("Female")}
           />
+
           {allCircles}
         </g>
       </svg>
