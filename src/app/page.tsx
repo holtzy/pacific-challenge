@@ -186,6 +186,47 @@ export default function Home() {
           </a>
           )
         </p>
+        <br />
+        <p>
+          Having established that women are generally less likely to be
+          employed, let's now examine if there are wage disparities compared to
+          men.
+        </p>
+        {/* ////////////////////// BARPLOT */}
+        <h2>But they are poorer</h2>
+        <p>
+          Wage differences between men and women are a notorious indicator of
+          gender inequality.
+        </p>
+        <p>
+          Our study provides access to the gross earnings ratio between women
+          and men for six of the seven islands (data for Nauru is missing). This
+          ratio indicates how much women earn compared to men: a value above 1
+          means women earn more, while a value below 1 means they earn less.
+        </p>
+        <p>
+          The data is categorized by occupation type. In the graph below, each
+          circle represents an occupation type, and the bar represents the
+          overall data for all occupations combined.
+        </p>
+        <p>
+          In the majority of the geographic zones (4 out of 6), the ratio is
+          below 1, indicating that women earn less than men.
+        </p>
+        <Barplot
+          width={600}
+          height={500}
+          data={
+            genderPayGap.filter((item) => item.Urbanization === "National")
+            // .filter((item) => item.Occupation === "All occupations")
+          }
+        />
+        <p>
+          However, in Kiribati and the Marshall Islands, the ratio is above 1,
+          suggesting that women earn more than men in these areas. This
+          surprising result conflicts with some other studies on the topic,
+          indicating a need for further exploration of the data.
+        </p>
         {/* ////////////////////// LOLLIPOP */}
         <h2>Women DO study</h2>
         <p>
@@ -228,23 +269,6 @@ export default function Home() {
         <p className="caption">
           Fig 1.1 and 1.2: educational attainment in {selectedIsland}.
         </p>
-
-        <h2>But they are poorer</h2>
-        <p>Women globally earn less than men.</p>
-        <p>
-          The gross earnings ratio between women and men is available for 6 out
-          of the 7 islands of our study. In four of them, the ratio was below 1,
-          meaning that women earn less than men.
-        </p>
-        <p>Interstingly, </p>
-        <Barplot
-          width={600}
-          height={500}
-          data={
-            genderPayGap.filter((item) => item.Urbanization === "National")
-            // .filter((item) => item.Occupation === "All occupations")
-          }
-        />
       </div>
     </main>
   );
