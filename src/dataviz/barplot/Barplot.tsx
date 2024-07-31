@@ -4,6 +4,7 @@ import { scaleBand, scaleLinear } from "d3-scale";
 import { useMemo, useState } from "react";
 import { InteractionData, Tooltip } from "./Tooltip";
 import { AXIS_COLOR, AXIS_FONT_SIZE } from "../constant";
+import { toast, useToast } from "@/components/ui/use-toast";
 
 const MARGIN = { top: 60, right: 30, bottom: 80, left: 100 };
 
@@ -19,6 +20,7 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
   const [hovered, setHovered] = useState<InteractionData | null>(null);
+  const [isProTipAllowed, setIsProTipAllowed] = useState(true);
 
   // Y axis is for groups since the barplot is horizontal;
   const yScale = useMemo(() => {
@@ -87,13 +89,21 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
             }
             strokeWidth={1}
             rx={1}
-            onMouseEnter={() =>
+            onMouseEnter={() => {
               setHovered({
                 xPos: xScale(d.OBS_VALUE),
                 yPos: y + yScale.bandwidth() / 2,
                 name: d.Occupation,
-              })
-            }
+              });
+              if (isProTipAllowed) {
+                toast({
+                  title: "Pro Tip",
+                  description:
+                    "When you hover over a circle, all circles representing the same occupation group are highlighted.",
+                });
+              }
+              setIsProTipAllowed(false);
+            }}
             onMouseLeave={() => setHovered(null)}
             cursor={"pointer"}
           />

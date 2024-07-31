@@ -12,6 +12,9 @@ type CircleItemProps = {
 
 export const CircleItem = ({ x, y, color, r, onClick }: CircleItemProps) => {
   const springProps = useSpring({
+    from: {
+      r: 1,
+    },
     to: {
       r,
       x,
@@ -19,7 +22,7 @@ export const CircleItem = ({ x, y, color, r, onClick }: CircleItemProps) => {
       color,
     },
     config: {
-      friction: 10,
+      friction: 100,
     },
   });
 

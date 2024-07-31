@@ -71,9 +71,8 @@ export const BubbleMap = ({
         : bubbleSize;
 
     return (
-      <g className={styles.circleContainer}>
+      <g className={styles.circleContainer} key={island.name}>
         <CircleItem
-          key={island.name}
           x={x}
           y={y}
           r={r}

@@ -219,10 +219,7 @@ export default function Home() {
         <Barplot
           width={600}
           height={500}
-          data={
-            genderPayGap.filter((item) => item.Urbanization === "National")
-            // .filter((item) => item.Occupation === "All occupations")
-          }
+          data={genderPayGap.filter((item) => item.Urbanization === "National")}
         />
         <p className="caption">
           Fig 2: Gross earning ratio between women and men. Represented for all
