@@ -88,7 +88,7 @@ export default function Home() {
       >
         <div className="relative w-full mt-20" style={{ height: 700 }}>
           <div className="absolute top-36">
-            <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-white to-transparent pointer-events-none" />
+            <div className="absolute w-full h-4/6 top-0 left-0 bg-gradient-to-b from-white to-transparent pointer-events-none" />
             <BubbleMap
               data={geoData}
               width={600}

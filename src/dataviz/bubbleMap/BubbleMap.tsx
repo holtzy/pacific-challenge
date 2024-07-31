@@ -2,9 +2,12 @@
 
 import { Island } from "@/lib/types";
 import { islandColorScale, islandCoordinates } from "@/lib/utils";
-import { geoMercator, geoOrthographic, geoPath } from "d3-geo";
+import { geoOrthographic, geoPath } from "d3-geo";
 import { FeatureCollection } from "geojson";
 import { CircleItem } from "./CircleItem";
+
+import styles from "./bubble-map.module.css";
+import { useRef } from "react";
 
 type BubbleMapProps = {
   width: number;
@@ -25,6 +28,8 @@ export const BubbleMap = ({
   scale,
   bubbleSize,
 }: BubbleMapProps) => {
+  const bubbleContainerRef = useRef(null);
+
   const projection = geoOrthographic()
     .rotate([200, 5])
     .scale(scale)
@@ -65,18 +70,29 @@ export const BubbleMap = ({
         ? bubbleSize * 2
         : bubbleSize;
 
-    console.log("r", r);
     return (
-      <CircleItem
-        key={island.name}
-        x={x}
-        y={y}
-        r={r}
-        color={color}
-        onClick={() => {
-          setSelectedIsland(island.name);
-        }}
-      />
+      <g className={styles.circleContainer}>
+        <CircleItem
+          key={island.name}
+          x={x}
+          y={y}
+          r={r}
+          color={color}
+          onClick={() => {
+            setSelectedIsland(island.name);
+          }}
+        />
+        <text
+          className={styles.circleText}
+          x={x < width - 100 ? x + r + 5 : x - r - 5}
+          y={y}
+          fill={color}
+          alignmentBaseline="middle"
+          textAnchor={x < width - 100 ? "start" : "end"}
+        >
+          {island.name}
+        </text>
+      </g>
     );
   });
 
@@ -84,7 +100,21 @@ export const BubbleMap = ({
     <div>
       <svg width={width} height={height}>
         {allSvgPaths}
-        {allBubbles}
+        <g
+          ref={bubbleContainerRef}
+          onMouseOver={() => {
+            if (bubbleContainerRef.current) {
+              bubbleContainerRef.current.classList.add(styles.hasHighlight);
+            }
+          }}
+          onMouseLeave={() => {
+            if (bubbleContainerRef.current) {
+              bubbleContainerRef.current.classList.remove(styles.hasHighlight);
+            }
+          }}
+        >
+          {allBubbles}
+        </g>
       </svg>
     </div>
   );
