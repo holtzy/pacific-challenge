@@ -156,6 +156,10 @@ export const Lollipop = ({ width, height, data, title }: LollipopProps) => {
     </>
   );
 
+  if (width === 0) {
+    return null;
+  }
+
   return (
     <div>
       <svg width={width} height={height} overflow={""}>

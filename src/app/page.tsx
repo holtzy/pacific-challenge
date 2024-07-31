@@ -21,7 +21,6 @@ export default function Home() {
 
   const containerRef = useRef(null);
   const containerSize = useDimensions(containerRef);
-  console.log("containerSize", containerSize);
 
   const [selectedIsland, setSelectedIsland] = useState<Island | undefined>(
     "Kiribati"
@@ -57,7 +56,7 @@ export default function Home() {
           if (entry.isIntersecting) {
             setIsMinimapEnabled(true);
           } else {
-            if (window.scrollY < entry.boundingClientRect.top) {
+            if (window.scrollY < 1500) {
               setIsMinimapEnabled(false);
             }
           }
@@ -105,7 +104,7 @@ export default function Home() {
             <div className="absolute w-full h-4/6 top-0 left-0 bg-gradient-to-b from-white to-transparent pointer-events-none" />
             <BubbleMap
               data={geoData}
-              width={containerSize.width}
+              width={containerSize.width || 600}
               height={600}
               selectedIsland={undefined}
               setSelectedIsland={setSelectedIsland}
@@ -190,7 +189,7 @@ export default function Home() {
 
       <div className="w-full flex justify-center bg-gray-50 py-4">
         <LineChart
-          width={containerSize.width}
+          width={containerSize.width || 600}
           height={400}
           data={employmentRates
             .filter((d) => d.island === selectedIsland)
@@ -241,7 +240,7 @@ export default function Home() {
         </p>
         <div onMouseEnter={() => setHighlightedOccupation(undefined)}>
           <Barplot
-            width={containerSize.width}
+            width={containerSize.width || 600}
             height={500}
             data={genderPayGap.filter(
               (item) => item.Urbanization === "National"
