@@ -297,8 +297,8 @@ export default function Home() {
           , the majority reach upper secondary school.
         </p>
         <p>
-          Overall, educational attainment is stable, with some notable
-          exceptions. In{" "}
+          Overall, educational attainment remains consistent across different
+          age groups, with some notable exceptions. In{" "}
           <a
             onClick={() => {
               setSelectedIsland("Kiribati");
@@ -307,9 +307,9 @@ export default function Home() {
           >
             Kiribati
           </a>
-          , for instance, most people aged 55-64 (right graph) only completed
-          lower secondary school, while younger individuals (aged 25-54, left
-          graph) reached upper secondary school.
+          , for instance, most people aged 55-64 (<i>right graph</i>) only
+          completed lower secondary school, while younger individuals (aged
+          25-54, <i>left graph</i>) reached upper secondary school.
         </p>
         <br />
         {islandSelectButtons}
@@ -340,7 +340,41 @@ export default function Home() {
         style={{ maxWidth: CONTAINER_WIDTH }}
       >
         <p className="caption">
-          Fig 3.1 and 3.2: educational attainment in {selectedIsland}.
+          Fig 3.1 and 3.2: highest level of education completed by individuals
+          in {selectedIsland}. The chart on the left represents younger
+          individuals, while the chart on the right represents older
+          individuals. Data: Education Attainment by country (
+          <a href="https://stats.pacificdata.org/vis?fs[0]=Topic%2C0%7CSocial%23SOC%23&pg=0&fc=Topic&bp=true&snb=26&df[ds]=ds%3ASPC2&df[id]=DF_EDUCATION&df[ag]=SPC&df[vs]=1.0&pd=%2C&dq=A.......&ly[cl]=EDUCATION&ly[rw]=GEO_PICT%2CTIME_PERIOD&to[TIME_PERIOD]=false&vw=ov">
+            link
+          </a>
+          )
+        </p>
+        <p>
+          More importantly, there is no significant difference between males and
+          females in terms of educational attainment.
+        </p>
+        <p>
+          For example, in the 25-54 age group, women consistently graduate at
+          the tertiary level more frequently than men, except in{" "}
+          <a
+            onClick={() => {
+              setSelectedIsland("Vanuatu");
+            }}
+            className="cursor-pointer"
+          >
+            Vanuatu
+          </a>
+          . Similarly, for upper secondary education, women outnumber men except
+          in{" "}
+          <a
+            onClick={() => {
+              setSelectedIsland("Palau");
+            }}
+            className="cursor-pointer"
+          >
+            Palau
+          </a>
+          .
         </p>
 
         <h2>Conclusion</h2>

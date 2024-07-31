@@ -216,7 +216,6 @@ export const Barplot = ({
       x2={xScale(1)}
       y2={boundsHeight}
       stroke="black"
-      stroke-width="2"
       stroke-dasharray="5,5"
     />
   );
@@ -241,8 +240,7 @@ export const Barplot = ({
         x2={xScale(1) + 20}
         y2={-10}
         stroke="black"
-        stroke-width="2"
-        marker-end="url(#arrowhead)"
+        markerEnd="url(#arrowhead)"
       />
       <line
         x1={xScale(1) - 10}
@@ -250,8 +248,7 @@ export const Barplot = ({
         x2={xScale(1) - 20}
         y2={-10}
         stroke="black"
-        stroke-width="2"
-        marker-end="url(#arrowhead)"
+        markerEnd="url(#arrowhead)"
       />
     </g>
   );

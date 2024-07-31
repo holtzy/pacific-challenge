@@ -1,12 +1,11 @@
 import { EducationLevelItem, allEducationLevels } from "@/lib/types";
 import { educationLevelItems, sexColorScale } from "@/lib/utils";
-import { extent, max } from "d3-array";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { useMemo } from "react";
 import { DumbbellItem } from "./DumbbellItem";
 import { AXIS_COLOR, AXIS_FONT_SIZE } from "../constant";
 
-const MARGIN = { top: 30, right: 30, bottom: 30, left: 150 };
+const MARGIN = { top: 30, right: 30, bottom: 60, left: 150 };
 
 type LollipopProps = {
   width: number;
@@ -62,7 +61,7 @@ export const Lollipop = ({ width, height, data, title }: LollipopProps) => {
           x2={xScale(value)}
           y1={0}
           y2={boundsHeight}
-          stroke="#808080"
+          stroke={AXIS_COLOR}
           opacity={0.2}
         />
         <text
@@ -71,7 +70,7 @@ export const Lollipop = ({ width, height, data, title }: LollipopProps) => {
           textAnchor="middle"
           alignmentBaseline="central"
           fontSize={9}
-          fill="#808080"
+          fill={AXIS_COLOR}
           opacity={0.8}
         >
           {value}
@@ -113,20 +112,13 @@ export const Lollipop = ({ width, height, data, title }: LollipopProps) => {
   const xAxisTitle = (
     <>
       <text
-        x={boundsWidth - 84}
+        x={boundsWidth + 20}
         y={boundsHeight + 40}
         fill={AXIS_COLOR}
         fontSize={AXIS_FONT_SIZE}
+        textAnchor="end"
       >
-        Ratio of the gross earnings
-      </text>
-      <text
-        x={boundsWidth - 84}
-        y={boundsHeight + 52}
-        fill={AXIS_COLOR}
-        fontSize={AXIS_FONT_SIZE}
-      >
-        between women and men
+        # of individuals
       </text>
     </>
   );
