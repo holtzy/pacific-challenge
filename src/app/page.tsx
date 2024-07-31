@@ -51,6 +51,10 @@ export default function Home() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsMinimapEnabled(true);
+          } else {
+            if (window.scrollY < entry.boundingClientRect.top) {
+              setIsMinimapEnabled(false);
+            }
           }
         });
       },
@@ -70,9 +74,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <main className="relative">
       {isMinimapEnabled && (
-        <div className="fixed top-2 right-2 border border-gray-200 rounded-md h-44 w-44 overflow-hidden">
+        <div className="bg-white fixed top-2 right-2 border border-gray-200 rounded-md h-44 w-44 overflow-hidden">
           <BubbleMap
             data={geoData}
             width={176}
