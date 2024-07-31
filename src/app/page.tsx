@@ -22,6 +22,10 @@ export default function Home() {
     "Kiribati"
   );
 
+  const [highlightedOccupation, setHighlightedOccupation] = useState<
+    string | undefined
+  >(undefined);
+
   const minimapRef = useRef(null);
 
   const islandSelectButtons = (
@@ -216,11 +220,17 @@ export default function Home() {
           In the majority of the geographic zones (4 out of 6), the ratio is
           below 1, indicating that women <b>earn less</b> than men.
         </p>
-        <Barplot
-          width={600}
-          height={500}
-          data={genderPayGap.filter((item) => item.Urbanization === "National")}
-        />
+        <div onMouseEnter={() => setHighlightedOccupation(undefined)}>
+          <Barplot
+            width={600}
+            height={500}
+            data={genderPayGap.filter(
+              (item) => item.Urbanization === "National"
+            )}
+            setSelectedIsland={setSelectedIsland}
+            highlightedOccupation={highlightedOccupation}
+          />
+        </div>
         <p className="caption">
           Fig 2: Gross earning ratio between women and men. Represented for all
           occupations (bars) and split by occupations (circles). Data: Gender
@@ -238,8 +248,25 @@ export default function Home() {
         </p>
         <p>
           It's worth noting that certain work categories deviate from this
-          pattern: in elementary occupations and craft and related trades, women
-          consistently earn less than men.
+          pattern: in{" "}
+          <a
+            onClick={() => {
+              setHighlightedOccupation("Elementary Occupations");
+            }}
+            className="cursor-pointer"
+          >
+            elementary occupations
+          </a>{" "}
+          and{" "}
+          <a
+            onClick={() => {
+              setHighlightedOccupation("Craft and Related Trades Workers");
+            }}
+            className="cursor-pointer"
+          >
+            craft and related trades
+          </a>
+          , women consistently earn less than men.
         </p>
         {/* ////////////////////// LOLLIPOP */}
         <h2>Education: The Root Cause?</h2>

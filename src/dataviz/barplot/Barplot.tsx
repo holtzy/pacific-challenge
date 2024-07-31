@@ -1,10 +1,10 @@
-import { GenderPayGapItem, allIslandNames } from "@/lib/types";
+import { GenderPayGapItem, Island, allIslandNames } from "@/lib/types";
 import { islandColorScale } from "@/lib/utils";
 import { scaleBand, scaleLinear } from "d3-scale";
 import { useMemo, useState } from "react";
 import { InteractionData, Tooltip } from "./Tooltip";
 import { AXIS_COLOR, AXIS_FONT_SIZE } from "../constant";
-import { toast, useToast } from "@/components/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 
 const MARGIN = { top: 60, right: 30, bottom: 80, left: 100 };
 
@@ -12,9 +12,17 @@ type BarplotProps = {
   width: number;
   height: number;
   data: GenderPayGapItem[];
+  setSelectedIsland: (newIsland: Island | undefined) => void;
+  highlightedOccupation: string | undefined;
 };
 
-export const Barplot = ({ width, height, data }: BarplotProps) => {
+export const Barplot = ({
+  width,
+  height,
+  data,
+  setSelectedIsland,
+  highlightedOccupation,
+}: BarplotProps) => {
   // bounds = area inside the graph axis = calculated by substracting the margins
   const boundsWidth = width - MARGIN.right - MARGIN.left;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
@@ -55,7 +63,7 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
                 : xScale(1) - xScale(d.OBS_VALUE)
             }
             height={yScale.bandwidth()}
-            opacity={hovered ? 0.1 : 1}
+            opacity={hovered || highlightedOccupation ? 0.1 : 1}
             stroke={islandColorScale(d.Location)}
             fill={islandColorScale(d.Location)}
             fillOpacity={0.8}
@@ -75,17 +83,22 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
         return null;
       }
 
+      const hasHighlightedGroup = hovered || highlightedOccupation;
+      const isHighlighteGroup =
+        hovered?.name === d.Occupation ||
+        highlightedOccupation === d.Occupation;
+
       return (
         <g key={i}>
           <circle
             cx={xScale(d.OBS_VALUE)}
             cy={y + yScale.bandwidth() / 2}
-            r={hovered ? (hovered.name === d.Occupation ? 6 : 1) : 4}
-            opacity={hovered ? (hovered.name === d.Occupation ? 1 : 0.05) : 0.7}
+            r={hasHighlightedGroup ? (isHighlighteGroup ? 6 : 1) : 4}
+            opacity={hasHighlightedGroup ? (isHighlighteGroup ? 1 : 0.05) : 0.7}
             stroke={islandColorScale(d.Location)}
             fill={islandColorScale(d.Location)}
             fillOpacity={
-              hovered ? (hovered.name === d.Occupation ? 1 : 0.05) : 0.7
+              hasHighlightedGroup ? (isHighlighteGroup ? 1 : 0.05) : 0.7
             }
             strokeWidth={1}
             rx={1}
@@ -103,6 +116,7 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
                 });
               }
               setIsProTipAllowed(false);
+              setSelectedIsland(d.Location);
             }}
             onMouseLeave={() => setHovered(null)}
             cursor={"pointer"}
@@ -188,12 +202,59 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
         fontSize={15}
         textAnchor="end"
         alignmentBaseline="middle"
-        opacity={0.3}
+        opacity={0.6}
       >
         {islandName}
       </text>
     );
   });
+
+  const centerAbline = (
+    <line
+      x1={xScale(1)}
+      y1={0}
+      x2={xScale(1)}
+      y2={boundsHeight}
+      stroke="black"
+      stroke-width="2"
+      stroke-dasharray="5,5"
+    />
+  );
+
+  const arrows = (
+    <g>
+      <defs>
+        <marker
+          id="arrowhead"
+          markerWidth="6"
+          markerHeight="4"
+          refX="0"
+          refY="2"
+          orient="auto"
+        >
+          <polygon points="0 0, 6 2, 0 4" fill="black" />
+        </marker>
+      </defs>
+      <line
+        x1={xScale(1) + 10}
+        y1={-10}
+        x2={xScale(1) + 20}
+        y2={-10}
+        stroke="black"
+        stroke-width="2"
+        marker-end="url(#arrowhead)"
+      />
+      <line
+        x1={xScale(1) - 10}
+        y1={-10}
+        x2={xScale(1) - 20}
+        y2={-10}
+        stroke="black"
+        stroke-width="2"
+        marker-end="url(#arrowhead)"
+      />
+    </g>
+  );
 
   return (
     <div className="relative">
@@ -209,6 +270,8 @@ export const Barplot = ({ width, height, data }: BarplotProps) => {
           {xAxisTitle}
           {yAxisTitle}
           {topAnnotations}
+          {centerAbline}
+          {arrows}
         </g>
       </svg>
 
