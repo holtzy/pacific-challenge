@@ -216,7 +216,7 @@ export const Barplot = ({
       x2={xScale(1)}
       y2={boundsHeight}
       stroke="black"
-      stroke-dasharray="5,5"
+      strokeDasharray="5,5"
     />
   );
 

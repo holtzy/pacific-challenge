@@ -12,11 +12,16 @@ import { geoData } from "@/data/pacific";
 import { genderPayGap } from "@/data/gender-pay-gap";
 import { LineChart } from "@/dataviz/lineChart/LineChart";
 import { employmentRates } from "@/data/employment_yh";
+import { useDimensions } from "@/lib/use-dimensions";
 
 const CONTAINER_WIDTH = 600;
 
 export default function Home() {
   const [isMinimapEnabled, setIsMinimapEnabled] = useState(false);
+
+  const containerRef = useRef(null);
+  const containerSize = useDimensions(containerRef);
+  console.log("containerSize", containerSize);
 
   const [selectedIsland, setSelectedIsland] = useState<Island | undefined>(
     "Kiribati"
@@ -29,7 +34,7 @@ export default function Home() {
   const minimapRef = useRef(null);
 
   const islandSelectButtons = (
-    <div className="flex gap-1 mt-4 ">
+    <div className="flex gap-1 mt-4 flex-wrap sm:flex-nowrap">
       {allIslandNames.map((item) => {
         return (
           <Button
@@ -74,7 +79,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative">
+    <main className="relative overflow-hidden">
       {isMinimapEnabled && (
         <div className="bg-white fixed top-2 right-2 border border-gray-200 rounded-md h-44 w-44 overflow-hidden">
           <BubbleMap
@@ -91,6 +96,7 @@ export default function Home() {
 
       {/* ////////////////////// TITLE SECTION */}
       <div
+        ref={containerRef}
         className="container mx-auto px-4 py-6 "
         style={{ maxWidth: CONTAINER_WIDTH }}
       >
@@ -99,7 +105,7 @@ export default function Home() {
             <div className="absolute w-full h-4/6 top-0 left-0 bg-gradient-to-b from-white to-transparent pointer-events-none" />
             <BubbleMap
               data={geoData}
-              width={600}
+              width={containerSize.width}
               height={600}
               selectedIsland={undefined}
               setSelectedIsland={setSelectedIsland}
@@ -180,13 +186,22 @@ export default function Home() {
         </p>
         <br />
         {islandSelectButtons}
+      </div>
+
+      <div className="w-full flex justify-center bg-gray-50 py-4">
         <LineChart
-          width={600}
+          width={containerSize.width}
           height={400}
           data={employmentRates
             .filter((d) => d.island === selectedIsland)
             .filter((d) => d.Sex !== "Total")}
-        />{" "}
+        />
+      </div>
+
+      <div
+        className="container mx-auto px-4 py-6 "
+        style={{ maxWidth: CONTAINER_WIDTH }}
+      >
         <p className="caption">
           Fig 1: Number of employed men and women in {selectedIsland}. Data:
           Employed population by economic sector (
@@ -226,7 +241,7 @@ export default function Home() {
         </p>
         <div onMouseEnter={() => setHighlightedOccupation(undefined)}>
           <Barplot
-            width={600}
+            width={containerSize.width}
             height={500}
             data={genderPayGap.filter(
               (item) => item.Urbanization === "National"
@@ -319,18 +334,17 @@ export default function Home() {
         {islandSelectButtons}
       </div>
 
-      <div className="w-full flex gap-2 justify-center">
+      <div className="w-full flex flex-col sm:flex-row gap-2 justify-center bg-gray-50 py-4">
         <Lollipop
-          width={500}
+          width={containerSize.width < 600 ? containerSize.width : 600}
           height={400}
           data={educationLevelData
             .filter((d) => d.island === selectedIsland)
             .filter((d) => d.age === "25-54")}
           title="Age Range: 25-54"
         />
-
         <Lollipop
-          width={500}
+          width={containerSize.width < 600 ? containerSize.width : 600}
           height={400}
           data={educationLevelData
             .filter((d) => d.island === selectedIsland)

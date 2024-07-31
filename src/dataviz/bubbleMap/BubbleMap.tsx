@@ -28,6 +28,7 @@ export const BubbleMap = ({
   scale,
   bubbleSize,
 }: BubbleMapProps) => {
+  console.log("width", width);
   const bubbleContainerRef = useRef(null);
 
   const projection = geoOrthographic()
